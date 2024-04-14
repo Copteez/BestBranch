@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class DemoController {
     @CrossOrigin
     @GetMapping("/")
-    public ArrayList<SciencePlan> gettAllSciencePlans() {
+    public ArrayList<SciencePlan> getAllSciencePlans() {
         OCS o = new OCS();
         System.out.println(o.getAllSciencePlans());
         return o.getAllSciencePlans();
