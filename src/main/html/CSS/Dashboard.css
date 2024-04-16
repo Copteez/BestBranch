@@ -1,0 +1,102 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.nav {
+    display: flex;
+    height: 100%;
+}
+
+.menu {
+    width: 250px;
+    background-color: white;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.1); /* Adding drop shadow */
+    position: relative; /* Set the parent element to relative positioning */
+}
+
+.menu-text {
+    color: #000; /* Text color */
+    margin-left: 10px;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.26px;
+    word-wrap: break-word
+}
+
+.menu-version{
+    color: #838383;
+    font-size: 10px;
+    font-weight: 500;
+    word-wrap: break-word;
+    margin-top: 10px;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    margin-bottom: 10px;
+}
+
+.menu ul li a {
+    color: #9197B3;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    word-wrap: break-word;
+    display: block;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.menu ul li a img {
+    vertical-align: middle; /* Align the logo vertically */
+    margin-right: 15px; /* Add some space between the logo and text */
+    width: 24px; /* Set the width of the image */
+    height: 24px; /* Set the height of the image */
+}
+
+.menu ul li a:hover img {
+    filter: brightness(0) invert(1); /* Invert the colors and set brightness to 0 */
+}
+
+.menu ul li a:hover {
+    background-color: #5932EA;
+    color: white;
+}
+
+.profile {
+    position: absolute; /* Position the profile section absolutely */
+    bottom: 0; /* Align the profile section to the bottom */
+    width: 100%; /* Make the profile section full width */
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff; /* Just for demonstration */
+}
+
+.logo-container {
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    z-index: 10; /* Ensure the logo stays on top of other elements */
+    display: flex;
+    align-items: center; /* Center items vertically */
+    margin-bottom: 20px; /* Add some space between logo/text and menu items */
+}
+
+.logo {
+    width: 70px; /* Adjust as needed */
+    height: auto; /* Keep the aspect ratio */
+}
