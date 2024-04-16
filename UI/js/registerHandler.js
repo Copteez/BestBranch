@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             confirmPassword: document.getElementById('confirm-password').value
         };
 
-        fetch('https://your-backend-api.com/register', {
+        fetch('http://localhost:8080/user/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

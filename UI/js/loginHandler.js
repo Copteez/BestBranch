@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             password: document.getElementById('password').value
         };
 
-        fetch('https://your-backend-api.com/login', {
+        fetch('http://localhost:8080/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
