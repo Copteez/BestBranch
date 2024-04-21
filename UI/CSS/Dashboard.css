@@ -76,9 +76,39 @@ body, html {
 }
 
 .profile {
+    width: 250px;
     position: absolute; /* Position the profile section absolutely */
     bottom: 0; /* Align the profile section to the bottom */
-    width: 100%; /* Make the profile section full width */
+    left: 10px; /* Adjust as needed */
+    display: block;
+    align-items: center; /* Center items vertically */
+    padding: 15px; /* Set initial padding */
+    border-radius: 5px;
+}
+
+.profile a {
+    text-decoration: none;
+    color: #9197B3;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.profile a:hover {
+    background-color: #5932EA;
+    color: white;
+}
+
+.profile a:hover img {
+    filter: brightness(0) invert(1); /* Invert the colors and set brightness to 0 */
+}
+
+.profile img {
+    vertical-align: middle; /* Align the logo vertically */
+    margin-right: 15px; /* Add some space between the logo and text */
+    width: 24px; /* Set the width of the image */
+    height: 24px; /* Set the height of the image */
 }
 
 .content {
