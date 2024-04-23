@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Submission Successful</title>
+  <link rel="stylesheet" th:href="@{assets/css/submit.css}">
+</head>
+<body>
+<div class="nav">
+  <div class="menu">
+    <div class="logo-container">
+      <img th:src="@{images/Logo_circle.png}" alt="Logo" class="logo">
+      <span class="menu-text">Submission</span>
+      <span class="menu-version">V0.1</span>
+    </div>
+    <ul>
+      <li><a href="#"><img th:src="@{images/key-square.png}" alt="Logo" class="logo-menu">Dashboard</a></li>
+      <li><a href="#"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Create Plan</a></li>
+      <li><a href="#"><img th:src="@{images/user-square%201.png}" alt="Logo" class="logo-menu">Submission</a></li>
+      <li><a href="#"><img th:src="@{images/wallet-money%202.png}" alt="Logo" class="logo-menu">Testing</a></li>
+    </ul>
+    <div class="profile">
+      <a href="#">
+        <img th:src="@{images/user.png}" alt="Logo" class="logo-menu">
+        <span>User Name</span>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h1>Submission Result</h1>
+  <p th:text="${message}">Success message will appear here.</p>
+  <a th:href="@{/submission}">Submit another plan</a>
+</div>
+</body>
+</html>

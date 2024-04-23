@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class DemoController {
@@ -35,16 +36,15 @@ public class DemoController {
         }
         model.addAttribute("draftPlan", draftPlan);
         model.addAttribute("submittedPlan", submittedPlan);
-
         return "Dashboard";
     }
 
     @CrossOrigin
     @GetMapping("/sciPlan/{id}")
     public @ResponseBody SciencePlan getSciencePlanByNo(@PathVariable("id") String id){
-        OCS ocs = new OCS();
+        OCS o = new OCS();
         if (id != null) {
-            ArrayList<SciencePlan> sciencePlans = ocs.getAllSciencePlans();
+            ArrayList<SciencePlan> sciencePlans = o.getAllSciencePlans();
             for (SciencePlan sp:sciencePlans){
                 if (sp.getPlanNo() == Integer.parseInt(id)){
                     return sp;
@@ -52,6 +52,40 @@ public class DemoController {
             }
         }
         return null;
+    }
+
+    @CrossOrigin
+    @GetMapping("/submission")
+    public String submission(Model model){
+        OCS o = new OCS();
+        // get draft plan
+        ArrayList<SciencePlan> AllSciencePlans = o.getAllSciencePlans();
+        ArrayList<SciencePlan> DraftSciencePlans = new ArrayList<>();
+        for (SciencePlan sp:AllSciencePlans){
+            if (sp.getStatus().equals(SciencePlan.STATUS.SAVED)){
+                DraftSciencePlans.add(sp);
+            }
+        }
+        System.out.println(DraftSciencePlans);
+        model.addAttribute("plans", DraftSciencePlans);
+        if (DraftSciencePlans.isEmpty()) {
+            model.addAttribute("emptyMessage", "No draft plans.");
+        }
+        return "submit";
+    }
+
+    @PostMapping("/submission")
+    public String handleSubmission(@RequestParam("planId") String planId, Model model) {
+        OCS o = new OCS();
+        if (planId != null) {
+            ArrayList<SciencePlan> sciencePlans = o.getAllSciencePlans();
+            for (SciencePlan sp:sciencePlans){
+                if (sp.getPlanNo() == Integer.parseInt(planId)){
+                    o.submitSciencePlan(sp);
+                }
+            }
+        }
+        return "submitResult";
     }
 
 
