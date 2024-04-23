@@ -5,12 +5,9 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
-.nav {
-    display: flex;
-    height: 100%;
-}
 
 .menu {
+    height: 100vh; /* Set height to 100% of viewport height */
     width: 250px;
     background-color: white;
     color: #fff;
@@ -18,7 +15,11 @@ body, html {
     display: flex;
     flex-direction: column;
     box-shadow: 0 10px 60px rgba(0, 0, 200, 0.1); /* Adding drop shadow */
-    position: relative; /* Set the parent element to relative positioning */
+    position: fixed; /* Change to fixed positioning */
+    top: 0; /* Align with the top of the viewport */
+    left: 0; /* Align with the left of the viewport */
+    z-index: 1000; /* Ensure it's on top of other content */
+    overflow-y: auto; /* Add scrollbar if content exceeds viewport height */
 }
 
 .menu-text {
@@ -36,13 +37,6 @@ body, html {
     font-weight: 500;
     word-wrap: break-word;
     margin-top: 10px;
-}
-
-.greeting-message {
-    text-align: center; /* Center the greeting message */
-    margin-bottom: 20px; /* Add some space below the greeting message */
-    font-size: 24px; /* Adjust the font size */
-    color: #333; /* Adjust the color */
 }
 
 
@@ -86,7 +80,7 @@ body, html {
 .profile {
     width: 250px;
     position: absolute; /* Position the profile section absolutely */
-    bottom: 10px; /* Align the profile section to the bottom */
+    bottom: 50px; /* Align the profile section to the bottom */
     left: 10px; /* Adjust as needed */
     display: block;
     align-items: center; /* Center items vertically */
@@ -134,18 +128,19 @@ body, html {
 
 .greeting-message {
     position: absolute;
-    top: 20px; /* Adjust as needed */
-    right: 20px; /* Adjust as needed */
-    text-align: center; /* Center the greeting message */
-    margin-bottom: 20px; /* Add some space below the greeting message */
-    font-size: 24px; /* Adjust the font size */
-    color: #333; /* Adjust the color */
+    top: 3%;
+    left: 20%; /* Adjust as needed */
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    z-index: 100; /* Ensure it stays above other elements */
 }
 
 .dashboard-content {
     position: absolute;
-    top: 100px; /* Adjust as needed */
-    right: 20px; /* Adjust as needed */
+    top: 15%; /* Adjust as needed */
+    right: 10%; /* Adjust as needed */
+    left: 20%;
     width: 75%;
     background-color: #ffffff;
     padding: 20px;
