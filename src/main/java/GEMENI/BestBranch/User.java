@@ -1,4 +1,4 @@
-package Demo;
+package GEMENI.BestBranch;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
