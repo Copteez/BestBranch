@@ -5,15 +5,18 @@ import edu.gemini.app.ocs.model.SciencePlan;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 
-@RestController
+@Controller
 public class DemoController {
     @CrossOrigin
     @GetMapping("/")
-    public ArrayList<SciencePlan> getAllSciencePlans() {
+    public String dashboard(Model model) {
         OCS o = new OCS();
         System.out.println(o.getAllSciencePlans());
-        return o.getAllSciencePlans();
+        model.addAttribute("plans", o.getAllSciencePlans());
+        return "Dashboard";
     }
 
     @CrossOrigin

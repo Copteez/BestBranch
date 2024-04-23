@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Gemini</title>
-    <link rel="icon" type="image/x-icon" href="../assets/Logo.ico">
-    <link rel="stylesheet" href="../CSS/Dashboard.css">
+    <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">
+    <link rel="stylesheet" th:href="@{assets/css/Dashboard.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
@@ -18,19 +18,19 @@
     <!-- Menu -->
     <div class="menu">
         <div class="logo-container">
-            <img src="../assets/Logo_circle.png" alt="Logo" class="logo">
+            <img th:src="@{images/Logo_circle.png}" alt="Logo" class="logo">
             <span class="menu-text">Dashboard</span>
             <span class="menu-version">V0.1</span>
         </div>
         <ul>
-            <li><a href="#"><img src="../assets/key-square.png" alt="Logo" class="logo-menu">Dashboard</a></li>
-            <li><a href="#"><img src="../assets/3d-square%201.png" alt="Logo" class="logo-menu">Create Plan</a></li>
-            <li><a href="#"><img src="../assets/user-square%201.png" alt="Logo" class="logo-menu">Submission</a></li>
-            <li><a href="#"><img src="../assets/wallet-money%202.png" alt="Logo" class="logo-menu">Testing</a></li>
+            <li><a href="#"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Dashboard</a></li>
+            <li><a href="#"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Create Plan</a></li>
+            <li><a href="#"><img th:src="@{images/user-square%201.png}" alt="Logo" class="logo-menu">Submission</a></li>
+            <li><a href="#"><img th:src="@{images/wallet-money%202.png}" alt="Logo" class="logo-menu">Testing</a></li>
         </ul>
         <div class="profile">
             <a href="#">
-                <img src="../assets/user.png" alt="Logo" class="logo-menu">
+                <img th:src="@{images/user.png}" alt="Logo" class="logo-menu">
                 <span>User Name</span>
             </a>
         </div>
@@ -43,7 +43,7 @@
     <div class="dashboard-content">
         <div class="Plan-detail">
             <div class="svg-container">
-                <img src="../assets/profile-2user.svg" alt="profile-2user">
+                <img th:src="@{images/profile-2user.svg}" alt="profile-2user">
             </div>
             <div class="Plan-Content">
                 <h2>Total Plan</h2>
@@ -52,7 +52,7 @@
         </div>
         <div class="Plan-detail">
             <div class="svg-container">
-                <img src="../assets/profile-2user.svg" alt="profile-2user">
+                <img th:src="@{images/profile-2user.svg}" alt="profile-2user">
             </div>
             <div class="Plan-Content">
                 <h2>Draft Plan</h2>
@@ -61,7 +61,7 @@
         </div>
         <div class="Plan-detail">
             <div class="svg-container">
-                <img src="../assets/profile-2user.svg" alt="profile-2user">
+                <img th:src="@{images/profile-2user.svg}" alt="profile-2user">
             </div>
             <div class="Plan-Content">
                 <h2>Active Plan</h2>
@@ -88,7 +88,6 @@
                     <select id="sort">
                         <option value="newest">Newest</option>
                         <option value="oldest">Oldest</option>
-                        <!-- Add more sorting options as needed -->
                     </select>
                 </div>
             </div>
@@ -97,25 +96,21 @@
             <thead>
             <tr>
                 <th>Plan ID</th>
-                <th>Plan Name</th>
                 <th>Star System</th>
                 <th>Creator</th>
                 <th>Submitter</th>
                 <th>Status</th>
-                <!-- Add more columns as needed -->
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>01 </td>
-                <td>name </td>
-                <td>system</td>
-                <td>Mama mia</td>
-                <td>mia Mama</td>
-                <td>Active</td>
-                <!-- Add more rows with plan details -->
+            <tbody>
+            <tr th:each="plan : ${plans}">
+                <td th:text="${plan.planNo}"></td>
+                <td th:text="${plan.starSystem}"></td>
+                <td th:text="${plan.creator}"></td>
+                <td th:text="${plan.submitter}"></td>
+                <td th:text="${plan.status}"></td>
             </tr>
-            <!-- Add more rows as needed -->
             </tbody>
         </table>
     </div>
