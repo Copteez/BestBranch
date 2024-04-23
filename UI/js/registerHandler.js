@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             console.log('Success:', data);
             // Option 1: Redirect
-            window.location.href = 'https://your-website.com/success';
+            window.location.href = 'http://127.0.0.1:5500/UI/html/index.html';
 
             // Option 2: Display a success message (comment out the above line if using this option)
             messageBox.innerHTML = '<p>Registration successful! Welcome aboard.</p>';
