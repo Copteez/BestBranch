@@ -12,11 +12,6 @@ public class DemoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
-//        OCS ocs = new OCS();
-//        ArrayList<SciencePlan> sciencePlans = ocs.getAllSciencePlans();
-//        for (SciencePlan sp : sciencePlans) {
-//            System.out.println(sp);
-//        }
     }
 
 }
