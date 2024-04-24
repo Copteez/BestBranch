@@ -1,4 +1,4 @@
-package GEMENI.BestBranch;
+package Demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
