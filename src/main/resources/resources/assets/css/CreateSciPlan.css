@@ -161,4 +161,10 @@ body, html {
     outline: none; /* Remove default focus outline */
 }
 
+.form-group button{
+    height: 50px;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
 
