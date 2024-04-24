@@ -13,7 +13,7 @@ body, html {
     /* display: flex; */
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/Tingting_Uni.jpg'); /* Add your image path */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/Tingting_Uni.jpg'); /* Add your image path */
     background-size: cover;
     background-position: center;
 }
