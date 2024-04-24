@@ -32,4 +32,9 @@ public class UserController {
         // Add attributes to the model as needed for the dashboard
         return "Dashboard";  // Ensure there's a 'Dashboard.html' in your templates directory
     }
+
+    @GetMapping("/register")
+    public String registerForm() {
+        return "register";  // This assumes the registration form is named 'register.html'
+    }
 }

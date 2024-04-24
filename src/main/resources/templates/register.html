@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,6 @@
     <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">
     <link rel="stylesheet" th:href="@{assets/css/accountManagement.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <!-- <script src="../js/registerHandler.js"></script> -->
 </head>
 <body>
     <div class="wrapper">
@@ -61,7 +60,7 @@
                     <br>
                     <div class="form-footer">
                         <button type="submit">Sign Up</button>
-                        <a href="index.html" class="signin-link">I Already Have An Account</a>
+                        <a th:href="@{/login}" class="signin-link">I Already Have An Account</a>
                     </div>
                 </form>
             </div>
