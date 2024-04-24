@@ -77,14 +77,16 @@ public class DemoController {
     @PostMapping("/submission")
     public String handleSubmission(@RequestParam("planId") String planId, Model model) {
         OCS o = new OCS();
+        String submitResult = "";
         if (planId != null) {
             ArrayList<SciencePlan> sciencePlans = o.getAllSciencePlans();
             for (SciencePlan sp:sciencePlans){
                 if (sp.getPlanNo() == Integer.parseInt(planId)){
-                    o.submitSciencePlan(sp);
+                    submitResult = o.submitSciencePlan(sp);
                 }
             }
         }
+        model.addAttribute("submitResult", submitResult);
         return "submitResult";
     }
 
