@@ -1,0 +1,56 @@
+/* General body settings */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center; /* Align vertically center */
+  justify-content: center; /* Align horizontally center */
+  height: 100vh; /* Full viewport height */
+  color: #333;
+}
+
+/* Container for the content */
+.container {
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Header styles */
+h1 {
+  font-size: 24px;
+  color: #5a5a5a;
+  text-align: center;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 10px;
+}
+
+/* Paragraph text styling */
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Link styling */
+a {
+  display: inline-block;
+  font-size: 18px;
+  background-color: #FFB21E;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px auto;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #eb9900;
+}

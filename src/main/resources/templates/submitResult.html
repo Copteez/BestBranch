@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Submission Successful</title>
-  <link rel="stylesheet" th:href="@{assets/css/submit.css}">
+  <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">
+  <link rel="stylesheet" th:href="@{assets/css/submitResult.css}">
+  <!-- <link rel="stylesheet" href="..\resources\assets\css\submitResult.css"> -->
 </head>
 <body>
 
 <div class="container">
   <h1>Submission Result</h1>
+  <center>
   <p th:text="${submitResult}"></p>
   <a th:href="@{/submission}">Submit another plan</a>
+  </center>
 </div>
 </body>
 </html>
