@@ -1,4 +1,4 @@
-package Demo;
+package Demo.controller;
 
 import edu.gemini.app.ocs.OCS;
 import edu.gemini.app.ocs.model.SciencePlan;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @Controller
 public class DemoController {
     @CrossOrigin
-    @GetMapping("/")
+    @GetMapping("/dashboard")
     public String dashboard(Model model) {
         OCS o = new OCS();
         System.out.println(o.getAllSciencePlans());
