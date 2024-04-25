@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Science Plan</title>
+    <title>Dashboard Gemini</title>
     <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">
-    <link rel="stylesheet" th:href="@{assets/css/CreateSciPlan.css}">
+    <link rel="stylesheet" th:href="@{assets/css/Dashboard.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
 <div class="container">
     <!-- Greeting message -->
     <div class="greeting-message">
-        <h1>Create NEW Science Plan</h1>
+        <h1>Hello, User! 👋🏼</h1>
     </div>
     <!-- Menu -->
     <div class="menu">
@@ -36,30 +36,100 @@
         </div>
     </div>
 </div>
-
-    <div class="form-container">
-        <form action="#" method="post">
+<div class="form-container">
+    <form action="#" method="post">
+        <div class="form-group">
+            <label for="Creator">Creator:</label>
+            <input type="text" id="Creator" name="Creator" required>
+        </div>
+        <div class="form-group">
+            <label for="PlanID">Plan ID:</label>
+            <input type="text" id="PlanID" name="PlanID" required>
+        </div>
+        <div class="form-group">
+            <label for="PlanName">Plan Name:</label>
+            <input type="text" id="PlanName" name="PlanName" required>
+        </div>
+        <div class="form-group">
+            <label for="objectives">Objectives:</label>
+            <textarea id="objectives" name="objectives" rows="4" cols="50"></textarea>
+        </div>
+        <h2>Data Processing Requirement</h2>
+        <div class="DPR">
             <div class="form-group">
-                <label for="Creator">Creator:</label>
-                <input type="text" id="Creator" name="Creator"  required>
+                <label for="fileType">File Type:</label>
+                <select id="fileType" name="fileType">
+                    <option value="pdf">PDF</option>
+                    <option value="doc">DOC</option>
+                    <option value="docx">DOCX</option>
+                    <option value="txt">TXT</option>
+                    <!-- Add more file types here if needed -->
+                </select>
             </div>
             <div class="form-group">
-                <label for="Plan ID">Plan ID:</label>
-                <input type="text"id="Plan ID" name="Plan ID" required>
+                <label for="fileQuality">File Quality:</label>
+                <select id="fileQuality" name="fileQuality">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <!-- Add more quality options here if needed -->
+                </select>
             </div>
             <div class="form-group">
-                <label for="Plan Name">Plan Name:</label>
-                <input type="text" id="Plan Name" name="Plan Name" required>
+                <label for="colorType">Color Type:</label>
+                <select id="colorType" name="colorType">
+                    <option value="rgb">RGB</option>
+                    <option value="hex">HEX</option>
+                    <option value="hsl">HSL</option>
+                    <!-- Add more color type options here if needed -->
+                </select>
             </div>
             <div class="form-group">
-                <label for="objectives">objectives:</label>
-                <textarea id="objectives" name="objectives" rows="4" cols="50"></textarea>
+                <label for="contrast">Contrast:</label>
+                <input type="number" id="contrast" name="contrast" step="any">
             </div>
             <div class="form-group">
-                <button type="submit">Create</button>
+                <label for="brightness">Brightness:</label>
+                <input type="number" id="brightness" name="brightness" step="any">
             </div>
-        </form>
-    </div>
+            <div class="form-group">
+                <label for="saturation">Saturation:</label>
+                <input type="number" id="saturation" name="saturation" step="any">
+            </div>
+            <div class="form-group">
+                <label for="highlights">Highlights:</label>
+                <input type="number" id="highlights" name="highlights" step="any">
+            </div>
+            <div class="form-group">
+                <label for="exposure">Exposure:</label>
+                <input type="number" id="exposure" name="exposure" step="any">
+            </div>
+            <div class="form-group">
+                <label for="shadows">Shadows:</label>
+                <input type="number" id="shadows" name="shadows" step="any">
+            </div>
+            <div class="form-group">
+                <label for="whites">Whites:</label>
+                <input type="number" id="whites" name="whites" step="any">
+            </div>
+            <div class="form-group">
+                <label for="blacks">Blacks:</label>
+                <input type="number" id="blacks" name="blacks" step="any">
+            </div>
+            <div class="form-group">
+                <label for="luminance">Luminance:</label>
+                <input type="number" id="luminance" name="luminance" step="any">
+            </div>
+            <div class="form-group">
+                <label for="hue">Hue:</label>
+                <input type="number" id="hue" name="hue" step="any">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit">Create</button>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>
