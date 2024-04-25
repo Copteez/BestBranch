@@ -24,9 +24,9 @@
         </div>
         <ul>
             <li><a th:href="@{/dashboard}"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Dashboard</a></li>
-            <li><a href="#"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Create Plan</a></li>
+            <li><a th:href="@{/CreateSciPlan}"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Create Plan</a></li>
             <li><a th:href="@{/submission}"><img th:src="@{images/user-square%201.png}" alt="Logo" class="logo-menu">Submission</a></li>
-            <li><a href="#"><img th:src="@{images/wallet-money%202.png}" alt="Logo" class="logo-menu">Testing</a></li>
+            <li><a th:href="@{/testing}"><img th:src="@{images/wallet-money%202.png}" alt="Logo" class="logo-menu">Testing</a></li>
         </ul>
         <div class="profile">
             <a th:href="@{/login}" class="logout-link">
@@ -37,7 +37,7 @@
     </div>
 </div>
 <div class="form-container">
-    <form action="#" method="post">
+    <form id="CreateSciPlanForm" th:action="@{/CreateSciPlan}" method="post">
         <div class="form-group">
             <label for="Creator">Creator:</label>
             <input type="text" id="Creator" name="Creator" required>
