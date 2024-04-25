@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Gemini</title>
+    <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">
+    <link rel="stylesheet" th:href="@{assets/css/submit.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
+<aside class="sidebar">
+    <!-- Sidebar content here -->
+    <div class="menu">
+        <div class="logo-container">
+            <img th:src="@{images/Logo_circle.png}" alt="Logo" class="logo">
+            <span class="menu-text">Submission</span>
+            <span class="menu-version">V0.1</span>
+        </div>
+        <ul>
+            <li><a th:href="@{/dashboard}"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Dashboard</a></li>
+            <li><a href="#"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Create Plan</a></li>
+            <li><a th:href="@{/submission}"><img th:src="@{images/user-square%201.png}" alt="Logo" class="logo-menu">Submission</a></li>
+            <li><a href="#"><img th:src="@{images/wallet-money%202.png}" alt="Logo" class="logo-menu">Testing</a></li>
+        </ul>
+        <div class="profile">
+            <a href="#">
+                <img th:src="@{images/user.png}" alt="Logo" class="logo-menu">
+                <span>Log out</span>
+            </a>
+        </div>
+    </div>
+</aside>
+<!-- submit -->
+<div class="testing-container">
+    <main class="testing-content">
+        <div class="testing-form">
+            <div class="form-header">
+                <h1>Testing</h1>
+            </div>
+            <form id="testingForm" th:action="@{/testing}" method="post">
+                <div class="form-group">
+                    <label for="submitter">Submitter</label>
+                    <input type="text" id="submitter" name="submitter">
+                </div>
+                <div class="form-group">
+                    <label for="planId">Choose Plan ID</label>
+                    <select id="planId" name="planId">
+                        <option value="">Select...</option>
+                        <!-- Option values go here -->
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancel</button>
+                    <button type="test" class="test-btn" th:href="@{templates/submitResult.html}">Testing</a></button>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
 
 </body>
 </html>
