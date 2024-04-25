@@ -7,6 +7,7 @@ import Demo.model.OurSciencePlan;
 import Demo.model.OurSciencePlanAdapter;
 import Demo.model.SciencePlanAdapter;
 import Demo.model.User;
+import Demo.repository.SciplanRepository;
 import edu.gemini.app.ocs.model.SciencePlan;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.ArrayList;
 
 @Controller
 public class DemoController {
+
+    @Autowired
+    private SciplanRepository sciplanRepository;
 
     static OCS o = new OCS();
 
