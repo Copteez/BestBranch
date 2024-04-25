@@ -47,7 +47,10 @@
                     <label for="planId">Choose Plan ID</label>
                     <select id="planId" name="planId">
                         <option value="">Select...</option>
-                        <!-- Option values go here -->
+                        <th:block th:each="plan : ${plans}">
+                            <option th:value="${plan.planNo}" th:text="${plan.starSystem}"></option>
+                        </th:block>
+
                     </select>
                 </div>
                 <div class="form-actions">

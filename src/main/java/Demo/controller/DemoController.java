@@ -1,96 +1,148 @@
 package Demo.controller;
 
+import java.text.ParseException;
 import java.util.List;
-import Demo.model.SciencePlan;
-import Demo.repository.SciencePlanRepository;
-import Demo.service.SciencePlanService;
+
+import Demo.model.OurSciencePlan;
+import Demo.model.OurSciencePlanAdapter;
+import Demo.model.SciencePlanAdapter;
+import Demo.model.User;
+import edu.gemini.app.ocs.model.SciencePlan;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 import edu.gemini.app.ocs.OCS;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @Controller
 public class DemoController {
 
-//    private final SciencePlanService sciencePlanService;
-//
-//    @Autowired
-//    public DemoController(SciencePlanService sciencePlanService) {
-//        this.sciencePlanService = sciencePlanService;
-//    }
-
-    @Autowired
-    private SciencePlanRepository SciencePlanRepository;
+    static OCS o = new OCS();
 
     @CrossOrigin
     @GetMapping("/dashboard")
-    public String dashboard(Model model) {
-        OCS o = new OCS();
-        List<SciencePlan> allSciencePlans = o.getAllSciencePlans();
-        // get plan list
-        model.addAttribute("plans", allSciencePlans);
+    public String dashboard(Model model, HttpSession session) throws ParseException {
+        User user = (User) session.getAttribute("loggininUser");
+        if (user != null) {
+            model.addAttribute("username", user.getName());
+        } else {
+            return "redirect:/login";
+        }
 
-        // get #all sciplan
-        model.addAttribute("totalPlans", allSciencePlans.size());
+        ArrayList<SciencePlan> sciencePlans = o.getAllSciencePlans();
 
-        // get #draft sciplan & #submitted sciplan using Stream API
-        long draftPlanCount = allSciencePlans.stream()
-                .filter(sp -> sp.getStatus() == SciencePlan.STATUS.SAVED)
-                .count();
-        long submittedPlanCount = allSciencePlans.stream()
-                .filter(sp -> sp.getStatus() == SciencePlan.STATUS.SUBMITTED)
-                .count();
+        ArrayList<OurSciencePlan> ourSciencePlans = new ArrayList<>();
+        for (SciencePlan plan : sciencePlans) {
+            ourSciencePlans.add(new OurSciencePlanAdapter(plan));
+        }
 
-        model.addAttribute("draftPlan", draftPlanCount);
-        model.addAttribute("submittedPlan", submittedPlanCount);
+        model.addAttribute("plans", ourSciencePlans);
+
+        model.addAttribute("totalPlans", ourSciencePlans.size());
+
+        Integer draftPlan = 0;
+        Integer submittedPlan = 0;
+        for (OurSciencePlan sp : ourSciencePlans) {
+            if (sp.getStatus().equals(SciencePlan.STATUS.SAVED)) {
+                draftPlan++;
+            }
+            if (sp.getStatus().equals(SciencePlan.STATUS.SUBMITTED)) {
+                submittedPlan++;
+            }
+        }
+        model.addAttribute("draftPlan", draftPlan);
+        model.addAttribute("submittedPlan", submittedPlan);
 
         return "Dashboard";
     }
 
+    // Show SciencePlan detail
     @CrossOrigin
     @GetMapping("/sciPlan/{id}")
-    public @ResponseBody SciencePlan getSciencePlanByNo(@PathVariable("id") String id){
-        OCS o = new OCS();
+    public @ResponseBody String getSciencePlanByNo(@PathVariable("id") String id, Model model, HttpSession session) throws ParseException {
+        User user = (User) session.getAttribute("loggininUser");
+        if (user != null) {
+            model.addAttribute("username", user.getName());
+        } else {
+            return "redirect:/login";
+        }
+
+        ArrayList<SciencePlan> sciencePlans = o.getAllSciencePlans();
+
+        ArrayList<OurSciencePlan> ourSciencePlans = new ArrayList<>();
+        for (SciencePlan plan : sciencePlans) {
+            ourSciencePlans.add(new OurSciencePlanAdapter(plan));
+        }
+
         if (id != null) {
-            for (SciencePlan sp: o.getAllSciencePlans()){
+            for (OurSciencePlan sp: ourSciencePlans){
                 if (sp.getPlanNo() == Integer.parseInt(id)){
-                    return sp;
+                    model.addAttribute("plans", (sp));
+                    return "Dashboard"; // Wait for Sciplan detial html file
                 }
             }
         }
-        return null;
+        return "Dashboard";
     }
 
     @CrossOrigin
     @GetMapping("/submission")
-    public String submission(Model model) {
-        OCS o = new OCS();
-        List<SciencePlan> draftSciencePlans = o.getSciencePlansByStatus(SciencePlan.STATUS.SAVED);
-
-        model.addAttribute("plans", draftSciencePlans);
-        if (draftSciencePlans.isEmpty()) {
-            model.addAttribute("emptyMessage", "No draft plans available.");
+    public String submission(Model model, HttpSession session) throws ParseException {
+        User user = (User) session.getAttribute("loggininUser");
+        if (user != null) {
+            model.addAttribute("username", user.getName());
+        } else {
+            return "redirect:/login";
+        }
+        ArrayList<SciencePlan> allSciencePlans = o.getAllSciencePlans();
+        ArrayList<SciencePlan> savedSciencePlans = new ArrayList<>();
+        for (SciencePlan sp:allSciencePlans){
+            if (sp.getStatus().equals(SciencePlan.STATUS.SAVED)){
+                savedSciencePlans.add(sp);
+            }
         }
 
+        ArrayList<OurSciencePlan> oursavedSciencePlans = new ArrayList<>();
+        for (SciencePlan plan : savedSciencePlans) {
+            oursavedSciencePlans.add(new OurSciencePlanAdapter(plan));
+        }
+        model.addAttribute("plans", oursavedSciencePlans);
         return "submit";
     }
 
 
     @PostMapping("/submission")
-    public String handleSubmission(@RequestParam("planId") String planId, Model model) {
-        OCS o = new OCS();
+    public String handleSubmission(@RequestParam("planId") String planId, Model model, HttpSession session) throws ParseException {
+        User user = (User) session.getAttribute("loggininUser");
+        if (user != null) {
+            model.addAttribute("username", user.getName());
+        } else {
+            return "redirect:/login";
+        }
+
         String submitResult = "";
-        if (planId != null) {
-            ArrayList<SciencePlan> sciencePlans = o.getAllSciencePlans();
-            for (SciencePlan sp:sciencePlans){
-                if (sp.getPlanNo() == Integer.parseInt(planId)){
-                    submitResult = o.submitSciencePlan(sp);
+
+        ArrayList<SciencePlan> allSciencePlans = o.getAllSciencePlans();
+        ArrayList<OurSciencePlan> ourSciencePlans = new ArrayList<>();
+        for (SciencePlan plan : allSciencePlans) {
+            ourSciencePlans.add(new OurSciencePlanAdapter(plan));
+        }
+
+        for (OurSciencePlan sp:ourSciencePlans){
+            if (sp.getPlanNo() == Integer.parseInt(planId)){
+                if (sp.getStatus().equals(SciencePlan.STATUS.TESTED)){
+                    sp.setSubmitterUser(user);
+                    submitResult = o.submitSciencePlan(new SciencePlanAdapter(sp));
+                    model.addAttribute("submitResult", submitResult);
+                    return "submitResult";
                 }
             }
+            submitResult = o.submitSciencePlan(new SciencePlanAdapter(sp));
         }
+
         model.addAttribute("submitResult", submitResult);
         return "submitResult";
     }

@@ -1,12 +1,6 @@
 package Demo.model;
 
-import Demo.repository.UserRepository;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,25 +9,30 @@ import java.util.Set;
 public class User {
     @Id
     private String email;
-    private String password;
 
-    // name: "user_science_plans" - the name of the join table.
-    // joinColumns: uses "user_email" to link rows in this table to the User entity.
-    // inverseJoinColumns: uses "plan_no" to link rows in this table to the SciencePlan entity.
+    private String password;
+    private String name;
+
     @ManyToMany
     @JoinTable(
             name = "user_science_plans",
-            joinColumns = @JoinColumn(name = "user_email"),
+            joinColumns = @JoinColumn(name = "user_email", referencedColumnName = "email"),
             inverseJoinColumns = @JoinColumn(name = "plan_no")
     )
-    // To ensures that each SciencePlan is unique within the set, and operations like add, remove, and check for existence are efficient.
-    private Set<SciencePlan> sciencePlans = new HashSet<>();
+    private Set<OurSciencePlan> sciencePlans = new HashSet<>();
+
+    @OneToMany(mappedBy = "creatorUser")
+    private Set<OurSciencePlan> createdPlans = new HashSet<>();
+
+    @OneToMany(mappedBy = "submitterUser")
+    private Set<OurSciencePlan> submittedPlans = new HashSet<>();
 
     public User() {}
 
-    public User(String email, String password) {
+    public User(String email, String password, String name) {
         this.email = email;
         this.password = password;
+        this.name = name;
     }
 
     public String getEmail() {
@@ -44,6 +43,14 @@ public class User {
         this.email = email;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -51,5 +58,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }
