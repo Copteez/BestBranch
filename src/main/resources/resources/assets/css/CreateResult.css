@@ -138,3 +138,13 @@ body, html {
     font-weight: 500;
     word-wrap: break-word
 }
+
+.back-button {
+    height: 50px;
+    margin-right: 100px;
+    margin-left: 100px;
+    background-color: orange;
+    border: none; /* Remove default border */
+    border-radius: 10px;
+    font-weight: bold;
+}
