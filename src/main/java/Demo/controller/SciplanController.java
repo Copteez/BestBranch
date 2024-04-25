@@ -55,7 +55,12 @@ public class SciplanController {
     }
 
     @GetMapping("/testing")
-    public String testSciPlan(@RequestParam("PlanID") int PlanID) {
+    public String testSciPlan() {
+        return "testing";
+    }
+
+    @PostMapping("/testing")
+    public String handelTestSciPlan(@RequestParam("PlanID") int PlanID) {
         OCS o = new OCS();
         SciencePlan testPlan = o.getSciencePlanByNo(PlanID);
         o.testSciencePlan(testPlan);
