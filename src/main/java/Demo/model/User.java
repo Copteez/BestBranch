@@ -2,12 +2,29 @@ package Demo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User {
     @Id
     private String email;
     private String password;
+
+    // name: "user_science_plans" - the name of the join table.
+    // joinColumns: uses "user_email" to link rows in this table to the User entity.
+    // inverseJoinColumns: uses "plan_no" to link rows in this table to the SciencePlan entity.
+    @ManyToMany
+    @JoinTable(
+            name = "user_science_plans",
+            joinColumns = @JoinColumn(name = "user_email"),
+            inverseJoinColumns = @JoinColumn(name = "plan_no")
+    )
+    // To ensures that each SciencePlan is unique within the set, and operations like add, remove, and check for existence are efficient.
+    private Set<SciencePlan> sciencePlans = new HashSet<>();
 
     public User() {}
 
@@ -30,5 +47,24 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<SciencePlan> getSciencePlans() {
+        return sciencePlans;
+    }
+
+    public void setSciencePlans(Set<SciencePlan> sciencePlans) {
+        this.sciencePlans = sciencePlans;
+    }
+
+    public void addSciencePlan(SciencePlan plan) {
+        if (this.sciencePlans == null) {
+            this.sciencePlans = new HashSet<>();
+        }
+        this.sciencePlans.add(plan);
+        if (plan.getUsers() == null) {
+            plan.setUsers(new HashSet<>());
+        }
+        plan.getUsers().add(this);
     }
 }
