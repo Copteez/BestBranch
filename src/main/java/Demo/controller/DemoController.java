@@ -1,40 +1,52 @@
 package Demo.controller;
 
-import edu.gemini.app.ocs.OCS;
-import edu.gemini.app.ocs.model.SciencePlan;
+import java.util.List;
+import Demo.model.SciencePlan;
+import Demo.repository.SciencePlanRepository;
+import Demo.service.SciencePlanService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import edu.gemini.app.ocs.OCS;
 
 import java.util.ArrayList;
 
 @Controller
 public class DemoController {
+
+//    private final SciencePlanService sciencePlanService;
+//
+//    @Autowired
+//    public DemoController(SciencePlanService sciencePlanService) {
+//        this.sciencePlanService = sciencePlanService;
+//    }
+
+    @Autowired
+    private SciencePlanRepository SciencePlanRepository;
+
     @CrossOrigin
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         OCS o = new OCS();
-        System.out.println(o.getAllSciencePlans());
+        List<SciencePlan> allSciencePlans = o.getAllSciencePlans();
         // get plan list
-        model.addAttribute("plans", o.getAllSciencePlans());
+        model.addAttribute("plans", allSciencePlans);
 
         // get #all sciplan
-        model.addAttribute("totalPlans", o.getAllSciencePlans().size());
+        model.addAttribute("totalPlans", allSciencePlans.size());
 
-        // get #draft sciplan & #submitted sciplan
-        Integer draftPlan = 0;
-        Integer submittedPlan = 0;
-        ArrayList<SciencePlan> AllSciencePlans = o.getAllSciencePlans();
-        for (SciencePlan sp:AllSciencePlans){
-            if (sp.getStatus().equals(SciencePlan.STATUS.SAVED)){
-                draftPlan+=1;
-            }
-            if (sp.getStatus().equals(SciencePlan.STATUS.SUBMITTED)){
-                submittedPlan+=1;
-            }
-        }
-        model.addAttribute("draftPlan", draftPlan);
-        model.addAttribute("submittedPlan", submittedPlan);
+        // get #draft sciplan & #submitted sciplan using Stream API
+        long draftPlanCount = allSciencePlans.stream()
+                .filter(sp -> sp.getStatus() == SciencePlan.STATUS.SAVED)
+                .count();
+        long submittedPlanCount = allSciencePlans.stream()
+                .filter(sp -> sp.getStatus() == SciencePlan.STATUS.SUBMITTED)
+                .count();
+
+        model.addAttribute("draftPlan", draftPlanCount);
+        model.addAttribute("submittedPlan", submittedPlanCount);
+
         return "Dashboard";
     }
 
@@ -43,8 +55,7 @@ public class DemoController {
     public @ResponseBody SciencePlan getSciencePlanByNo(@PathVariable("id") String id){
         OCS o = new OCS();
         if (id != null) {
-            ArrayList<SciencePlan> sciencePlans = o.getAllSciencePlans();
-            for (SciencePlan sp:sciencePlans){
+            for (SciencePlan sp: o.getAllSciencePlans()){
                 if (sp.getPlanNo() == Integer.parseInt(id)){
                     return sp;
                 }
@@ -55,23 +66,18 @@ public class DemoController {
 
     @CrossOrigin
     @GetMapping("/submission")
-    public String submission(Model model){
+    public String submission(Model model) {
         OCS o = new OCS();
-        // get draft plan
-        ArrayList<SciencePlan> AllSciencePlans = o.getAllSciencePlans();
-        ArrayList<SciencePlan> DraftSciencePlans = new ArrayList<>();
-        for (SciencePlan sp:AllSciencePlans){
-            if (sp.getStatus().equals(SciencePlan.STATUS.SAVED)){
-                DraftSciencePlans.add(sp);
-            }
+        List<SciencePlan> draftSciencePlans = o.getSciencePlansByStatus(SciencePlan.STATUS.SAVED);
+
+        model.addAttribute("plans", draftSciencePlans);
+        if (draftSciencePlans.isEmpty()) {
+            model.addAttribute("emptyMessage", "No draft plans available.");
         }
-        System.out.println(DraftSciencePlans);
-        model.addAttribute("plans", DraftSciencePlans);
-        if (DraftSciencePlans.isEmpty()) {
-            model.addAttribute("emptyMessage", "No draft plans.");
-        }
+
         return "submit";
     }
+
 
     @PostMapping("/submission")
     public String handleSubmission(@RequestParam("planId") String planId, Model model) {
@@ -90,6 +96,4 @@ public class DemoController {
     }
 
 
-
 }
-

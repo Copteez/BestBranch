@@ -2,12 +2,12 @@ package Demo.model;
 
 import jakarta.persistence.*;
 import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Set;
 
 @Entity
 public class SciencePlan {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int planNo;
     private String name;
 
@@ -66,6 +66,8 @@ public class SciencePlan {
         this.users.add(user);
         user.getSciencePlans().add(this);
     }
+
+
 
     /**
      * Simulates the testing of a science plan.
