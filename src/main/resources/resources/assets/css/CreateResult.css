@@ -138,3 +138,22 @@ body, html {
     font-weight: 500;
     word-wrap: break-word
 }
+
+.back-button {
+    height: 50px;
+    background-color: orange;
+    border: none; /* Remove default border */
+    border-radius: 10px;
+    font-weight: bold;
+    padding-top:30px;
+    text-align: center;
+}
+
+.result-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 40%;
+    margin-right: 30%;
+    margin-top: 10%;
+    justify-content: center;
+}
