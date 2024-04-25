@@ -1,10 +1,13 @@
 package Demo.model;
 
+import Demo.repository.UserRepository;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,22 +52,4 @@ public class User {
         this.password = password;
     }
 
-    public Set<SciencePlan> getSciencePlans() {
-        return sciencePlans;
-    }
-
-    public void setSciencePlans(Set<SciencePlan> sciencePlans) {
-        this.sciencePlans = sciencePlans;
-    }
-
-    public void addSciencePlan(SciencePlan plan) {
-        if (this.sciencePlans == null) {
-            this.sciencePlans = new HashSet<>();
-        }
-        this.sciencePlans.add(plan);
-        if (plan.getUsers() == null) {
-            plan.setUsers(new HashSet<>());
-        }
-        plan.getUsers().add(this);
-    }
 }
