@@ -23,7 +23,7 @@ public class SciplanController {
     private SciplanRepository sciplanRepository;
 
     @GetMapping("/CreateSciPlan")
-    public String loginForm() {
+    public String CreateSciPlan() {
         return "CreateSciPlan";
     }
 
@@ -47,21 +47,20 @@ public class SciplanController {
                                       @RequestParam("hue") double hue
     ) {
         DataProcRequirement newDataProcRequirements = new DataProcRequirement(fileType, fileQuality, colorType, contrast, brightness, saturation, highlights, exposure, shadows, whites, blacks, luminance, hue);
-//        SciencePlan newSciPlan = new SciencePlan(PlanID,
-//                Creator, "submitter_placeholder", 99.99, objectives,
-//                StarSystem.CONSTELLATIONS.Andromeda, new Date(), new Date(),
-//                edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC.HAWAII,
-//                newDataProcRequirements);
-        SciencePlan newSciPlan = new SciencePlan(Creator, "submitter_placeholder", 800813.69420, objectives,  StarSystem.CONSTELLATIONS.Andromeda, new Date(), new Date(), edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC.HAWAII, newDataProcRequirements);
+        SciencePlan newSciPlan = new SciencePlan(Creator, "submitter_placeholder", 800813.69420, objectives, StarSystem.CONSTELLATIONS.Andromeda, new Date(), new Date(), edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC.HAWAII, newDataProcRequirements);
         OCS o = new OCS();
         o.createSciencePlan(newSciPlan);
 
-//        SciencePlan newSciPlan = new SciencePlan(PlanID, PlanName);
-//        SciplanRepository.save(newSciPlan);
-
-
-
         return "sciplanCreated";
     }
+
+    @GetMapping("/testing")
+    public String testSciPlan(@RequestParam("PlanID") int PlanID) {
+        OCS o = new OCS();
+        SciencePlan testPlan = o.getSciencePlanByNo(PlanID);
+        o.testSciencePlan(testPlan);
+        return "redirect:/dashboard";
+    }
+
 
 }
