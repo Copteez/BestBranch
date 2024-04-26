@@ -88,8 +88,8 @@ public class DemoController {
         }
 
         if (id != null) {
-            for (OurSciencePlan sp: ourSciencePlans){
-                if (sp.getPlanNo() == Integer.parseInt(id)){
+            for (OurSciencePlan sp : ourSciencePlans) {
+                if (sp.getPlanNo() == Integer.parseInt(id)) {
                     model.addAttribute("plans", (sp));
                     return "Dashboard"; // Wait for Sciplan detial html file
                 }
@@ -105,20 +105,20 @@ public class DemoController {
 
     @PostMapping("/CreateSciPlan")
     public String handelCreateSciPlan(
-                                      @RequestParam("objectives") String objectives,
-                                      @RequestParam("fileType") String fileType,
-                                      @RequestParam("fileQuality") String fileQuality,
-                                      @RequestParam("colorType") String colorType,
-                                      @RequestParam("contrast") double contrast,
-                                      @RequestParam("brightness") double brightness,
-                                      @RequestParam("saturation") double saturation,
-                                      @RequestParam("highlights") double highlights,
-                                      @RequestParam("exposure") double exposure,
-                                      @RequestParam("shadows") double shadows,
-                                      @RequestParam("whites") double whites,
-                                      @RequestParam("blacks") double blacks,
-                                      @RequestParam("luminance") double luminance,
-                                      @RequestParam("hue") double hue
+            @RequestParam("objectives") String objectives,
+            @RequestParam("fileType") String fileType,
+            @RequestParam("fileQuality") String fileQuality,
+            @RequestParam("colorType") String colorType,
+            @RequestParam("contrast") double contrast,
+            @RequestParam("brightness") double brightness,
+            @RequestParam("saturation") double saturation,
+            @RequestParam("highlights") double highlights,
+            @RequestParam("exposure") double exposure,
+            @RequestParam("shadows") double shadows,
+            @RequestParam("whites") double whites,
+            @RequestParam("blacks") double blacks,
+            @RequestParam("luminance") double luminance,
+            @RequestParam("hue") double hue
     ) throws ParseException {
         DataProcRequirement newDataProcRequirements = new DataProcRequirement(fileType, fileQuality, colorType, contrast, brightness, saturation, highlights, exposure, shadows, whites, blacks, luminance, hue);
         Date currentDate = new Date();
@@ -136,7 +136,40 @@ public class DemoController {
     }
 
     @GetMapping("/testing")
-    public String testSciPlan() { return "testing";}
+    public String testSciPlan(Model model, HttpSession session) throws ParseException {
+        ArrayList<SciencePlan> sciencePlans = o.getAllSciencePlans();
+        ArrayList<OurSciencePlan> ourSciencePlans = new ArrayList<>();
+        ArrayList<SciencePlan> savedSciencePlans = new ArrayList<>();
+
+        for (SciencePlan plan : sciencePlans) {
+            ourSciencePlans.add(new OurSciencePlanAdapter(plan));
+        }
+
+        for (OurSciencePlan sp : ourSciencePlans) {
+            if (sp.getStatus().equals(SciencePlan.STATUS.SAVED)) {
+                savedSciencePlans.add(sp);
+            }
+        }
+        model.addAttribute("plans", savedSciencePlans);
+
+        return "testing";
+    }
+
+    @PostMapping("/testing")
+    public String handelTestSciPlan(@RequestParam("planId") String planId, Model model, HttpSession session) throws ParseException {
+        User user = (User) session.getAttribute("loggininUser");
+        if (user != null) {
+            model.addAttribute("username", user.getName());
+        } else {
+            return "redirect:/login";
+        }
+
+        OCS o = new OCS();
+        SciencePlan testPlan = o.getSciencePlanByNo(Integer.parseInt(planId));
+        String result = o.testSciencePlan(testPlan);
+        System.out.println("\n\nresult of sciPLan ID:"+ Integer.parseInt(planId)+result);
+        return "redirect:/dashboard";
+    }
 
 
     @CrossOrigin
@@ -150,8 +183,8 @@ public class DemoController {
         }
         ArrayList<SciencePlan> allSciencePlans = o.getAllSciencePlans();
         ArrayList<SciencePlan> savedSciencePlans = new ArrayList<>();
-        for (SciencePlan sp:allSciencePlans){
-            if (sp.getStatus().equals(SciencePlan.STATUS.SAVED)){
+        for (SciencePlan sp : allSciencePlans) {
+            if (sp.getStatus().equals(SciencePlan.STATUS.SAVED)) {
                 savedSciencePlans.add(sp);
             }
         }
@@ -182,9 +215,9 @@ public class DemoController {
             ourSciencePlans.add(new OurSciencePlanAdapter(plan));
         }
 
-        for (OurSciencePlan sp:ourSciencePlans){
-            if (sp.getPlanNo() == Integer.parseInt(planId)){
-                if (sp.getStatus().equals(SciencePlan.STATUS.TESTED)){
+        for (OurSciencePlan sp : ourSciencePlans) {
+            if (sp.getPlanNo() == Integer.parseInt(planId)) {
+                if (sp.getStatus().equals(SciencePlan.STATUS.TESTED)) {
                     sp.setSubmitterUser(user);
                     submitResult = o.submitSciencePlan(new SciencePlanAdapter(sp));
                     model.addAttribute("submitResult", submitResult);
@@ -197,7 +230,6 @@ public class DemoController {
         model.addAttribute("submitResult", submitResult);
         return "submitResult";
     }
-
 
 
 }
