@@ -1,9 +1,13 @@
 package Demo.controller;
 
-import edu.gemini.app.ocs.model.SciencePlan;
+import Demo.model.OurSciencePlanAdapter;
+import Demo.model.OurSciencePlan;
+import Demo.controller.UserController;
+import Demo.model.SciencePlanAdapter;
 import Demo.repository.SciplanRepository;
 import edu.gemini.app.ocs.OCS;
 import edu.gemini.app.ocs.model.DataProcRequirement;
+import edu.gemini.app.ocs.model.SciencePlan;
 import edu.gemini.app.ocs.model.StarSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -45,16 +50,13 @@ public class SciplanController {
                                       @RequestParam("blacks") double blacks,
                                       @RequestParam("luminance") double luminance,
                                       @RequestParam("hue") double hue
-    ) {
+    ) throws ParseException {
         DataProcRequirement newDataProcRequirements = new DataProcRequirement(fileType, fileQuality, colorType, contrast, brightness, saturation, highlights, exposure, shadows, whites, blacks, luminance, hue);
         SciencePlan newSciPlan = new SciencePlan(Creator, "submitter_placeholder", 800813.69420, objectives, StarSystem.CONSTELLATIONS.Andromeda, new Date(), new Date(), edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC.HAWAII, newDataProcRequirements);
-        OCS o = new OCS();
-        o.createSciencePlan(newSciPlan);
+        OurSciencePlan newOurSciPlan = new OurSciencePlan(UserController.getLoginUser(), UserController.getLoginUser(), 800813.69420, objectives, StarSystem.CONSTELLATIONS.Andromeda, new Date(), new Date(), edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC.HAWAII, newDataProcRequirements);
+        sciplanRepository.save(newOurSciPlan);
 
-//        SciencePlan newSciPlan = new SciencePlan(PlanID, PlanName);
-//        SciplanRepository.save(newSciPlan);
-
-        return "sciplanCreated";
+        return "dashboard";
     }
 
     @GetMapping("/testing")

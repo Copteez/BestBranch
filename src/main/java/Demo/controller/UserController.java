@@ -18,6 +18,11 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    private static User loginUser;
+
+    public static User getLoginUser() {
+        return loginUser;
+    }
 
     @GetMapping("/login")
     public String loginForm() {
@@ -31,6 +36,7 @@ public class UserController {
         Optional<User> user = userRepository.findById(email);
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             session.setAttribute("loggininUser", user.get());
+            this.loginUser = user.get();
             return "redirect:/dashboard";
         } else {
             return "redirect:/login";
