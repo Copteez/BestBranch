@@ -2,6 +2,7 @@ package Demo.controller;
 
 import Demo.model.User;
 import Demo.repository.UserRepository;
+import edu.gemini.app.ocs.OCS;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    static OCS o = new OCS();
     private static User loginUser;
 
     public static User getLoginUser() {

@@ -1,14 +1,20 @@
 package Demo.controller;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.text.ParseException;
 
 import Demo.model.OurSciencePlan;
 import Demo.model.OurSciencePlanAdapter;
 import Demo.model.SciencePlanAdapter;
 import Demo.model.User;
 import Demo.repository.SciplanRepository;
+import edu.gemini.app.ocs.model.DataProcRequirement;
 import edu.gemini.app.ocs.model.SciencePlan;
+import edu.gemini.app.ocs.model.StarSystem;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -92,6 +98,47 @@ public class DemoController {
         return "Dashboard";
     }
 
+    @GetMapping("/CreateSciPlan")
+    public String CreateSciPlan() {
+        return "CreateSciPlan";
+    }
+
+    @PostMapping("/CreateSciPlan")
+    public String handelCreateSciPlan(
+                                      @RequestParam("objectives") String objectives,
+                                      @RequestParam("fileType") String fileType,
+                                      @RequestParam("fileQuality") String fileQuality,
+                                      @RequestParam("colorType") String colorType,
+                                      @RequestParam("contrast") double contrast,
+                                      @RequestParam("brightness") double brightness,
+                                      @RequestParam("saturation") double saturation,
+                                      @RequestParam("highlights") double highlights,
+                                      @RequestParam("exposure") double exposure,
+                                      @RequestParam("shadows") double shadows,
+                                      @RequestParam("whites") double whites,
+                                      @RequestParam("blacks") double blacks,
+                                      @RequestParam("luminance") double luminance,
+                                      @RequestParam("hue") double hue
+    ) throws ParseException {
+        DataProcRequirement newDataProcRequirements = new DataProcRequirement(fileType, fileQuality, colorType, contrast, brightness, saturation, highlights, exposure, shadows, whites, blacks, luminance, hue);
+        Date currentDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DATE, 1);
+        Date afterDate = calendar.getTime();
+
+        OurSciencePlan newOurSciPlan = new OurSciencePlan(UserController.getLoginUser(), UserController.getLoginUser(), 800813.69420, objectives, StarSystem.CONSTELLATIONS.Andromeda, currentDate, afterDate, edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC.HAWAII, newDataProcRequirements);
+        o.createSciencePlan(new SciencePlanAdapter(newOurSciPlan));
+
+        sciplanRepository.save(newOurSciPlan);
+
+        return "redirect:/dashboard";
+    }
+
+    @GetMapping("/testing")
+    public String testSciPlan() { return "testing";}
+
+
     @CrossOrigin
     @GetMapping("/submission")
     public String submission(Model model, HttpSession session) throws ParseException {
@@ -150,6 +197,7 @@ public class DemoController {
         model.addAttribute("submitResult", submitResult);
         return "submitResult";
     }
+
 
 
 }
