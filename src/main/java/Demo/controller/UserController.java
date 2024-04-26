@@ -42,6 +42,12 @@ public class UserController {
             return "redirect:/login";
         }
     }
+
+    @GetMapping("/register")
+    public String registerForm() {
+        return "register";
+    }
+
     @PostMapping("/register")
     public String handleregister(@RequestParam("regisemail") String regisemail,
                               @RequestParam("regispassword") String regispassword, @RequestParam("regisname") String regisname,

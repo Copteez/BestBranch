@@ -208,6 +208,7 @@ body, html {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 30px;
 }
 
 .plan-list-header span{
@@ -217,6 +218,8 @@ body, html {
 .search-and-sort {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
+    margin-left: auto;
 }
 
 .search-and-sort input[type="text"] {

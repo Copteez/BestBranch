@@ -20,7 +20,7 @@
             <div class="register-container">
                 <h2 style="color: #8b8b8b; text-align: left;">Register</h2>
                 
-                <form class="register-form">
+                <form class="register-form" th:action="@{/register}" method="post">
                     <!-- Role selection with icon -->
                     <div class="input-container">
                         <i class="fas fa-user-tag"></i>
@@ -31,30 +31,30 @@
                     </div>
                     
                     <!-- Input fields with icons -->
-                    <div class="input-container">
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="full-name" name="full-name" placeholder="Enter Your Full Name">
-                    </div>
-                    
+<!--                    <div class="input-container">-->
+<!--                        <i class="fas fa-user"></i>-->
+<!--                        <input type="text" id="full-name" name="full-name" placeholder="Enter Your Full Name">-->
+<!--                    </div>-->
+
                     <div class="input-container">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" name="email" placeholder="Enter Email">
+                        <input type="email" id="regisemail" name="regisemail" placeholder="Enter Email" required>
                     </div>
                     
                     <div class="input-container">
                         <i class="fas fa-user-circle"></i>
-                        <input type="text" id="username" name="username" placeholder="Enter Username">
+                        <input type="name" id="regisname" name="regisname" placeholder="Enter Name" required>
                     </div>
                     
                     <div class="input-container">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="password" name="password" placeholder="Enter Password">
+                        <input type="password" id="regispassword" name="regispassword" placeholder="Enter Password" required>
                     </div>
                     
-                    <div class="input-container">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password">
-                    </div>
+<!--                    <div class="input-container">-->
+<!--                        <i class="fas fa-lock"></i>-->
+<!--                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password">-->
+<!--                    </div>-->
                     
                     <!-- Sign Up button -->
                     <br>
