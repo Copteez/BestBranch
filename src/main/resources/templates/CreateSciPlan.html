@@ -39,8 +39,40 @@
 <div class="form-container">
     <form id="CreateSciPlanForm" th:action="@{/CreateSciPlan}" method="post">
         <div class="form-group">
+            <label for="PlanName">Plan Name:</label>
+            <input type="text" id="PlanName" name="PlanName" required>
+        </div>
+        <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+        </div>
+        <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required>
+        </div>
+        <div class="form-group">
+            <label for="funding">funding:</label>
+            <input type="number" id="funding" name="funding" required>
+        </div>
+        <div class="form-group">
+            <label for="StarSystem">StarSystem:</label>
+            <select id="StarSystem" name="StarSystem" required>
+                <option value="Andromeda">Andromeda</option>
+                <option value="Antlia">Antlia</option>
+                <option value="Apus">Apus</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="objectives">Objectives:</label>
             <textarea id="objectives" name="objectives" rows="4" cols="50"></textarea>
+        </div>
+        <h2>SciencePlan telescope location</h2>
+        <div class="form-group">
+            <label for="Location">Location:</label>
+            <select id="Location" name="Location" required>
+                <option value="CHILE">CHILE</option>
+                <option value="HAWAII">HAWAII</option>
+            </select>
         </div>
         <h2>Data Processing Requirement</h2>
         <div class="DPR">
