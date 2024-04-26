@@ -7,6 +7,20 @@
     <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">
     <link rel="stylesheet" th:href="@{assets/css/testing.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script>
+<!--    get plan ออกมา ที่เป้น attribute ออกมา ex plan.id plan.object ไรงี้-->
+        function updateSciPlanDetails() {
+        var planId = document.getElementById("planId").value;
+        var detailsContainer = document.getElementById("sciPlanDetails");
+        if (planId) {
+            // Assuming fetching details from a server or hardcoded for demo
+            detailsContainer.innerHTML = `<strong>Plan Details:</strong> Details for Plan ID ${planId}`;
+            detailsContainer.style.display = 'block';
+        } else {
+            detailsContainer.style.display = 'none';
+       }
+}
+</script>
 </head>
 <body>
 <aside class="sidebar">
@@ -14,7 +28,7 @@
     <div class="menu">
         <div class="logo-container">
             <img th:src="@{images/Logo_circle.png}" alt="Logo" class="logo">
-            <span class="menu-text">Submission</span>
+            <span class="menu-text">Testing</span>
             <span class="menu-version">V0.1</span>
         </div>
         <ul>
@@ -40,19 +54,18 @@
             </div>
             <form id="testingForm" th:action="@{/testing}" method="post">
                 <div class="form-group">
-                    <label for="submitter">Submitter</label>
-                    <input type="text" id="submitter" name="submitter">
-                </div>
-                <div class="form-group">
                     <label for="planId">Choose Plan ID</label>
-                    <select id="planId" name="planId">
+                    <select id="planId" name="planId" onchange="updateSciPlanDetails()">
                         <option value="">Select...</option>
                         <!-- Option values go here -->
                     </select>
                 </div>
+                <div id="sciPlanDetails" class="sci-plan-details" style="display:none;">
+                    <!-- Dynamically filled details will appear here -->
+                </div>
                 <div class="form-actions">
                     <button type="button" class="cancel-btn">Cancel</button>
-                    <button type="test" class="test-btn" th:href="@{templates/submitResult.html}">Testing</a></button>
+                    <button type="submit" class="test-btn">Testing</button>
                 </div>
             </form>
         </div>
