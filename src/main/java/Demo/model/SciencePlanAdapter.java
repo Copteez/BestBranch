@@ -17,9 +17,12 @@ public class SciencePlanAdapter extends SciencePlan {
         super();
         if (plan != null) {
             this.ourPlan = plan;
-            setPlanNo(ourPlan.getPlanNo());
             setCreator(ourPlan.getCreatorUser().getName());
-            setSubmitter(ourPlan.getSubmitterUser().getName());
+            if (plan.getSubmitter().equals(null)){
+                setSubmitter("");
+            }else{
+                setSubmitter(ourPlan.getSubmitterUser().getName());
+            }
             setFundingInUSD(ourPlan.getFundingInUSD());
             setObjectives(ourPlan.getObjectives());
             setStarSystem(StarSystem.CONSTELLATIONS.valueOf(ourPlan.getStarSystem().name()));
@@ -31,7 +34,6 @@ public class SciencePlanAdapter extends SciencePlan {
             setEndDate(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(endDate));
 
             setTelescopeLocation(TELESCOPELOC.valueOf(ourPlan.getTelescopeLocation().name()));
-            setStatus(STATUS.valueOf(ourPlan.getStatus().name()));
         }
     }
 
