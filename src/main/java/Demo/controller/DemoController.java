@@ -124,12 +124,11 @@ public class DemoController {
         Date currentDate = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currentDate);
-        calendar.add(Calendar.DATE, 1);
+        calendar.add(Calendar.DATE, 90);
         Date afterDate = calendar.getTime();
-
-        OurSciencePlan newOurSciPlan = new OurSciencePlan(UserController.getLoginUser(), null, 800813.69420, objectives, StarSystem.CONSTELLATIONS.Andromeda, currentDate, afterDate, edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC.HAWAII, newDataProcRequirements);
+        System.out.println("afterDate:" + afterDate + " currentDate:" + currentDate);
+        OurSciencePlan newOurSciPlan = new OurSciencePlan(UserController.getLoginUser(), UserController.getLoginUser(), 800813.69420, objectives, StarSystem.CONSTELLATIONS.Libra, currentDate, afterDate, SciencePlan.TELESCOPELOC.CHILE, newDataProcRequirements);
         o.createSciencePlan(new SciencePlanAdapter(newOurSciPlan));
-
         sciplanRepository.save(newOurSciPlan);
 
         return "redirect:/dashboard";
