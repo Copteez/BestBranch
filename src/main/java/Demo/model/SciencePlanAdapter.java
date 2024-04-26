@@ -18,7 +18,11 @@ public class SciencePlanAdapter extends SciencePlan {
         if (plan != null) {
             this.ourPlan = plan;
             setCreator(ourPlan.getCreatorUser().getName());
-            setSubmitter(ourPlan.getSubmitterUser().getName());
+            if (plan.getSubmitter().equals(null)){
+                setSubmitter("");
+            }else{
+                setSubmitter(ourPlan.getSubmitterUser().getName());
+            }
             setFundingInUSD(ourPlan.getFundingInUSD());
             setObjectives(ourPlan.getObjectives());
             setStarSystem(StarSystem.CONSTELLATIONS.valueOf(ourPlan.getStarSystem().name()));

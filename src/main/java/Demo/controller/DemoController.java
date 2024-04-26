@@ -127,7 +127,7 @@ public class DemoController {
         calendar.add(Calendar.DATE, 1);
         Date afterDate = calendar.getTime();
 
-        OurSciencePlan newOurSciPlan = new OurSciencePlan(UserController.getLoginUser(), UserController.getLoginUser(), 800813.69420, objectives, StarSystem.CONSTELLATIONS.Andromeda, currentDate, afterDate, edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC.HAWAII, newDataProcRequirements);
+        OurSciencePlan newOurSciPlan = new OurSciencePlan(UserController.getLoginUser(), null, 800813.69420, objectives, StarSystem.CONSTELLATIONS.Andromeda, currentDate, afterDate, edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC.HAWAII, newDataProcRequirements);
         o.createSciencePlan(new SciencePlanAdapter(newOurSciPlan));
 
         sciplanRepository.save(newOurSciPlan);
