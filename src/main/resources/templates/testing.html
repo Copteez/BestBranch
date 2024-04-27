@@ -7,21 +7,34 @@
     <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">
     <link rel="stylesheet" th:href="@{assets/css/testing.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<!--    <script>-->
-    <!--&lt;!&ndash;    get plan ออกมา ที่เป้น attribute ออกมา ex plan.id plan.object ไรงี้&ndash;&gt;-->
-    <!--        function updateSciPlanDetails() {-->
-    <!--        var planId = document.getElementById("planId").value;-->
-    <!--        var detailsContainer = document.getElementById("sciPlanDetails");-->
-    <!--        if (planId) {-->
-    <!--            // Assuming fetching details from a server or hardcoded for demo-->
-    <!--            detailsContainer.innerHTML = `<strong>Plan Details:</strong> Details for Plan ID ${planId}`;-->
-    <!--            detailsContainer.style.display = 'block';-->
-    <!--        } else {-->
-    <!--            detailsContainer.style.display = 'none';-->
-    <!--       }-->
-    <!--}-->
-    <!--</script>-->
-    <!--</head>-->
+
+    <script>
+    function updateSciPlanDetails() {
+        var planId = document.getElementById("planId").value;
+        var detailsContainer = document.getElementById("sciPlanDetails");
+        if (planId) {
+            // Fetch plan details from a server endpoint
+            fetch(`/api/plan-details/${planId}`)
+                .then(response => response.json())
+                .then(plan => {
+                    detailsContainer.innerHTML = `
+                        <strong>Plan ID:</strong> ${planId}<br>
+                        <strong>Plan Name:</strong> ${plan.name}<br>
+                        <strong>Start Date:</strong> ${plan.startDate}<br>
+                        <strong>End Date:</strong> ${plan.endDate}<br>
+                        <strong>Funding:</strong> ${plan.fundingInUSD}<br>
+                        <strong>Star System:</strong> ${plan.starSystem}<br>
+                        <strong>Objective:</strong> ${plan.objectives}<br>
+                        <strong>Location:</strong> ${plan.telescopeLocation}
+                    `;
+                    detailsContainer.style.display = 'block';
+                });
+        } else {
+            detailsContainer.style.display = 'none';
+        }
+    }
+    </script>
+    </head>
 <body>
 <aside class="sidebar">
     <!-- Sidebar content here -->
@@ -47,11 +60,11 @@
 </aside>
 <!-- submit -->
 <div class="testing-container">
+    <div class="greeting-message">
+        <h1>Testing</h1>
+    </div>
     <main class="testing-content">
         <div class="testing-form">
-            <div class="form-header">
-                <h1>Testing</h1>
-            </div>
             <form id="testingForm" th:action="@{/testing}" method="post">
                 <div class="form-group">
                     <label for="planId">Choose Plan ID</label>
@@ -67,8 +80,8 @@
                     <!-- Dynamically filled details will appear here -->
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="cancel-btn">Cancel</button>
-                    <button type="submit" class="test-btn">Testing</button>
+                    <button type="button" class="cancel-btn" th:href="@{templates/dashboard.html}">Cancel</a></button>
+                    <button type="submit" class="submit-btn" th:href="@{templates/testingResult.html}">Submission</a></button>
                 </div>
             </form>
         </div>

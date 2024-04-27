@@ -145,17 +145,18 @@ body, html {
     margin-right: 20px; /* Add some space between the svg-container and Total-Plan-Content */
 }
 
-.submission-form {
-   .submission-form {
+ .submission-form {
        /* ... other styles ... */
        box-shadow: none;  /* Remove the shadow */
    }
-}
 
-.form-header h1 {
-    margin-bottom: 30px;
-    color: #333;
-    text-align: center;
+.greeting-message {
+    top: 3%;
+    margin-left: 25%;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+    word-wrap: break-word
 }
 
 /* Form Group Styles */
@@ -201,35 +202,39 @@ body, html {
 
 /* Submit Button Styles */
 .cancel-btn {
-    display: inline-block;
       font-size: 18px;
-      background-color: #cc2c18;
       color: white;
-      padding: 10px 20px;
-      margin: 20px auto;
+      padding: 15px 25px;
       text-align: center;
-      border-radius: 5px;
-      text-decoration: none;
+        border-radius: 10px;
+        box-shadow: none;
+         height: 50px;
+            margin-top: 100px;
+            margin-right: 100px;
+            margin-left: 100px;
+            background-color: #cc2c18;
+}
+
+.cancel-btn:hover {
+  background-color: #eb9900;
 }
 
 .submit-btn {
-display: inline-block;
   font-size: 18px;
-  background-color: #FFB21E;
   color: white;
-  padding: 10px 20px;
-  margin: 20px auto;
+  padding: 15px 25px;
   text-align: center;
-  border-radius: 5px;
-  text-decoration: none;
+  border-radius: 10px;
+  box-shadow: none;
+   height: 50px;
+   margin-top: 100px;
+      margin-right: 100px;
+      margin-left: 100px;
+      background-color: orange;
 }
 
-/* General button styling adjustments */
-.form-group button {
-    /* ... other styles ... */
-    padding: 10px 20px;  /* Adjust padding for size */
-    font-weight: bold;  /* Make text bold */
-    border: none;  /* Remove borders if any */
+.submit-btn:hover {
+  background-color: #eb9900;
 }
 
         .sci-plan-details {
