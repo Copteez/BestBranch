@@ -130,7 +130,8 @@ public class DemoController {
             @RequestParam("hue") double hue
     ) throws ParseException {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+        //Date input example _startDate:2024-04-26_endDate:2024-07-25
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = dateFormat.parse(_startDate);
         Date endDate = dateFormat.parse(_endDate);
 
