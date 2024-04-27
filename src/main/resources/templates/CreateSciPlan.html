@@ -38,10 +38,10 @@
 </div>
 <div class="form-container">
     <form id="CreateSciPlanForm" th:action="@{/CreateSciPlan}" method="post">
-        <div class="form-group">
-            <label for="PlanName">Plan Name:</label>
-            <input type="text" id="PlanName" name="PlanName" required>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="PlanName">Plan Name:</label>-->
+<!--            <input type="text" id="PlanName" name="PlanName" required>-->
+<!--        </div>-->
         <div class="form-group">
             <label for="startDate">Start Date:</label>
             <input type="date" id="startDate" name="startDate" required>
@@ -56,10 +56,12 @@
         </div>
         <div class="form-group">
             <label for="StarSystem">StarSystem:</label>
-            <select id="StarSystem" name="StarSystem" required>
-                <option value="Andromeda">Andromeda</option>
-                <option value="Antlia">Antlia</option>
-                <option value="Apus">Apus</option>
+            <select id="StarSystem" name="StarSystem">
+                <option value="">Select...</option>
+                <th:block th:each="constellation : ${CONSTELLATIONS}">
+                    <option th:value="${constellation}" th:text="${constellation}"></option>
+                </th:block>
+                <!-- Option values go here -->
             </select>
         </div>
         <div class="form-group">
@@ -70,8 +72,10 @@
         <div class="form-group">
             <label for="Location">Location:</label>
             <select id="Location" name="Location" required>
-                <option value="CHILE">CHILE</option>
-                <option value="HAWAII">HAWAII</option>
+                <option value="">Select...</option>
+                <th:block th:each="location : ${TELESCOPELOC}">
+                    <option th:value="${location}" th:text="${location}"></option>
+                </th:block>
             </select>
         </div>
         <h2>Data Processing Requirement</h2>

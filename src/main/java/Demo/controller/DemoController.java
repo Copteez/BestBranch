@@ -99,7 +99,11 @@ public class DemoController {
     }
 
     @GetMapping("/CreateSciPlan")
-    public String CreateSciPlan() {
+    public String CreateSciPlan(Model model) {
+
+        model.addAttribute("CONSTELLATIONS", StarSystem.CONSTELLATIONS.values());
+        model.addAttribute("TELESCOPELOC", SciencePlan.TELESCOPELOC.values());
+
         return "CreateSciPlan";
     }
 
@@ -107,6 +111,11 @@ public class DemoController {
     public String handelCreateSciPlan(
             @RequestParam("objectives") String objectives,
             @RequestParam("fileType") String fileType,
+            @RequestParam("funding") double funding,
+            @RequestParam("StarSystem") StarSystem.CONSTELLATIONS constellation,
+            @RequestParam("Location") SciencePlan.TELESCOPELOC location,
+            @RequestParam("startDate") String _startDate,
+            @RequestParam("endDate") String _endDate,
             @RequestParam("fileQuality") String fileQuality,
             @RequestParam("colorType") String colorType,
             @RequestParam("contrast") double contrast,
@@ -120,14 +129,31 @@ public class DemoController {
             @RequestParam("luminance") double luminance,
             @RequestParam("hue") double hue
     ) throws ParseException {
-        DataProcRequirement newDataProcRequirements = new DataProcRequirement(fileType, fileQuality, colorType, contrast, brightness, saturation, highlights, exposure, shadows, whites, blacks, luminance, hue);
-        Date currentDate = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(currentDate);
-        calendar.add(Calendar.DATE, 90);
-        Date afterDate = calendar.getTime();
-        System.out.println("afterDate:" + afterDate + " currentDate:" + currentDate);
-        OurSciencePlan newOurSciPlan = new OurSciencePlan(UserController.getLoginUser(), UserController.getLoginUser(), 800813.69420, objectives, StarSystem.CONSTELLATIONS.Libra, currentDate, afterDate, SciencePlan.TELESCOPELOC.CHILE, newDataProcRequirements);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+        Date startDate = dateFormat.parse(_startDate);
+        Date endDate = dateFormat.parse(_endDate);
+
+        DataProcRequirement newDataProcRequirements = new DataProcRequirement(
+                fileType, fileQuality, colorType,
+                contrast, brightness, saturation,
+                highlights, exposure, shadows,
+                whites, blacks, luminance,
+                hue
+        );
+
+        OurSciencePlan newOurSciPlan = new OurSciencePlan(
+                UserController.getLoginUser(),
+                UserController.getLoginUser(),  // <--- need to fix to be null or smt
+                funding,
+                objectives,
+                constellation,
+                startDate,
+                endDate,
+                location,
+                newDataProcRequirements
+        );
+
         o.createSciencePlan(new SciencePlanAdapter(newOurSciPlan));
         sciplanRepository.save(newOurSciPlan);
 
@@ -166,7 +192,7 @@ public class DemoController {
         OCS o = new OCS();
         SciencePlan testPlan = o.getSciencePlanByNo(Integer.parseInt(planId));
         String result = o.testSciencePlan(testPlan);
-        System.out.println("\n\nresult of sciPLan ID:"+ Integer.parseInt(planId)+result);
+        System.out.println("\n\nresult of sciPLan ID:" + Integer.parseInt(planId) + result);
         return "redirect:/dashboard";
     }
 
