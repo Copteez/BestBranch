@@ -8,6 +8,8 @@ body, html {
 /* Existing styles remain unchanged */
 .container {
     display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .menu {

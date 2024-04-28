@@ -8,6 +8,8 @@ body, html {
 /* Existing styles remain unchanged */
 .container {
     display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .menu {
@@ -130,119 +132,72 @@ body, html {
     height: auto; /* Keep the aspect ratio */
 }
 
-.submit-content {
-    flex-grow: 1;
-    display: flex;
-    align-items: center; /* Center .submission-form vertically */
-    justify-content: center; /* Center .submission-form horizontally */
-    padding: 20px;
-}
-
-.svg-container {
-    height: 40px;
-    width: 40px;
-    position: relative;
-    margin-right: 20px; /* Add some space between the svg-container and Total-Plan-Content */
-}
-
- .submission-form {
-       /* ... other styles ... */
-       box-shadow: none;  /* Remove the shadow */
-   }
-
 .greeting-message {
     top: 3%;
-    margin-left: 25%;
-    color: black;
+    margin-left: 20%;
+    text-align: center;
     font-size: 24px;
-    font-weight: 500;
-    word-wrap: break-word
-}
-
-/* Form Group Styles */
-.form-group {
-    margin-bottom: 20px;
-}
-
-/* Label Styles */
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 16px;
     color: #333;
+    z-index: 100; /* Ensure it stays above other elements */
 }
 
-/* Input Field Styles */
-.form-group input[type="text"],
-.form-group select {
+.Plan-Content {
+    flex: 1; /* Take up remaining space */
+}
+
+.plan-list {
+    background-color: #ffffff;
+    padding: 30px;
+    margin-top: 20px;
+    margin-right: 40px;
+    margin-left: 20%; /* Add margin to separate it from other content */
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box; /* So padding doesn't affect the width */
-    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 0 4px 50px rgba(0, 0, 150, 0.1);
+    display: flex;
+    flex-direction: column; /* Change the direction to column */
+    align-items: flex-start;
 }
 
-.form-group input[type="text"]:focus,
-.form-group select:focus {
-    border-color: #aaa;
-    outline: none; /* Removes the default focus outline */
+.plan-list table {
+    width: 100%; /* Make the table fill the entire width */
+    border-collapse: collapse; /* Collapse borders */
 }
 
-/* Select Dropdown Styles */
-.form-group select {
-    -webkit-appearance: none; /* Removes default chrome and safari style */
-    -moz-appearance: none;    /* Removes default style Firefox */
-    appearance: none;         /* Removes default style for IE */
-    background-image: url('path-to-your-dropdown-icon.png'); /* Add your own icon */
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    padding-right: 30px; /* Make space for the icon */
+.plan-list th, .plan-list td {
+    padding: 10px; /* Add padding to cells */
+    border-bottom: #EEEEEE solid 1px;
+    text-align: left; /* Align text to the left */
 }
 
-/* Submit Button Styles */
-.cancel-btn {
-      font-size: 18px;
-      color: white;
-      padding: 15px 25px;
-      text-align: center;
-        border-radius: 10px;
-        box-shadow: none;
-         height: 50px;
-            margin-top: 100px;
-            margin-right: 100px;
-            margin-left: 100px;
-            background-color: #cc2c18;
+.plan-list th {
+    background-color: #FFFFFF; /* Background color for header */
 }
 
-.cancel-btn:hover {
-  background-color: #eb9900;
+.plan-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
 }
 
-.submit-btn {
-  font-size: 18px;
-  color: white;
-  padding: 15px 25px;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: none;
-   height: 50px;
-   margin-top: 100px;
-      margin-right: 100px;
-      margin-left: 100px;
-      background-color: orange;
+.plan-list-header span{
+    color: #16C098;
 }
 
-.submit-btn:hover {
-  background-color: #eb9900;
+.close-icon-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px; /* Icon size, adjust as needed */
+    z-index: 1001; /* Above the menu */
 }
-        .sci-plan-details {
-        margin-top: 20px;
-        padding: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        color: #333;
-        font-size: 14px;
-        display: none; /* Initially hidden */
-        }
+
+.close-icon-container a {
+    color: #000; /* Icon color, adjust as needed */
+    text-decoration: none;
+}
+
+.close-icon-container a:hover {
+    color: #555; /* Icon hover color, adjust as needed */
+}

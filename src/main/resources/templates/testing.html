@@ -51,7 +51,7 @@
             <li><a th:href="@{/testing}"><img th:src="@{images/wallet-money%202.png}" alt="Logo" class="logo-menu">Testing</a></li>
         </ul>
         <div class="profile">
-            <a href="#">
+            <a href="/login">
                 <img th:src="@{images/user.png}" alt="Logo" class="logo-menu">
                 <span>Log out</span>
             </a>
@@ -80,7 +80,7 @@
                     <!-- Dynamically filled details will appear here -->
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="cancel-btn" th:href="@{templates/dashboard.html}">Cancel</a></button>
+                    <a href="/dashboard"  button type="button" class="cancel-btn">Cancel</button></a>
                     <button type="submit" class="submit-btn" th:href="@{templates/testingResult.html}">Submission</a></button>
                 </div>
             </form>
