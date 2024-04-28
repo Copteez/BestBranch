@@ -24,10 +24,11 @@ public class DemoController {
 
     @Autowired
     private SciplanRepository sciplanRepository;
+    OCS o = new OCS();
 
 
     @GetMapping("/dashboard")
-    public String dashboard(Model model, HttpSession session) {
+    public String dashboard(Model model, HttpSession session) throws ParseException {
         User user = (User) session.getAttribute("loggininUser");
         if (user != null) {
             model.addAttribute("username", user.getName());
@@ -39,20 +40,21 @@ public class DemoController {
         ArrayList<OurSciencePlan> oursciplans = new ArrayList<>();
 
         Integer curplan = 0;
-        Integer draftPlan = 0;
+        Integer savedplan = 0;
         Integer submittedPlan = 0;
         for (OurSciencePlan plan: ourplans){
             if (plan.getStatus().equals(SciencePlan.STATUS.SAVED)) {
-                draftPlan++;
+                savedplan++;
             }
             if (plan.getStatus().equals(SciencePlan.STATUS.SUBMITTED)) {
                 submittedPlan++;
             }
             curplan++;
             oursciplans.add(plan);
+            o.createSciencePlan(new SciencePlanAdapter(plan));
         }
 
-        model.addAttribute("draftPlan", draftPlan);
+        model.addAttribute("draftPlan", savedplan);
         model.addAttribute("submittedPlan", submittedPlan);
         model.addAttribute("plans", oursciplans);
         model.addAttribute("totalPlans", oursciplans.size());
@@ -146,7 +148,7 @@ public class DemoController {
 
         OurSciencePlan newOurSciPlan = new OurSciencePlan(
                 user,
-                user,  // <--- need to fix to be null or smt
+                user,
                 funding,
                 objectives,
                 constellation,
@@ -157,13 +159,15 @@ public class DemoController {
         );
 
         Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
-        Integer curplan = 0;
+        Integer curplan = 1;
         for (OurSciencePlan plan: ourplans){
             curplan++;
         }
         newOurSciPlan.setPlanNo(curplan);
         newOurSciPlan.setStatus(SciencePlan.STATUS.SAVED);
+
         sciplanRepository.save(newOurSciPlan);
+        o.createSciencePlan(new SciencePlanAdapter(newOurSciPlan));
 
         return "redirect:/dashboard";
     }
@@ -193,8 +197,6 @@ public class DemoController {
         User user = (User) session.getAttribute("loggininUser");
         if (user == null) return "redirect:/login";
 
-
-        OCS o = new OCS();
         Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
         OurSciencePlan oursciplan = null;
         String result = "";
@@ -205,102 +207,60 @@ public class DemoController {
             }
         }
 
-        System.out.println("\n oursciplan : \n" +
-                "\nID : "  + oursciplan.getPlanNo()+
-                "\nstatus : " + oursciplan.getStatus()+
-                "\nstartDate : " + oursciplan.getStartDate()+
-                "\nendDate : " + oursciplan.getEndDate()+
-                "\ngetObjectives ; " + oursciplan.getObjectives()+
-                "\ngetStarSystem : "+ oursciplan.getStarSystem()+
-                "\ngetfunding : " + oursciplan.getFundingInUSD()+
-                "\ncreater : " + oursciplan.getCreator()+
-                "\nsubmitter : " + oursciplan.getSubmitter()+
-                "\narray : " + oursciplan.getDataProcRequirements()
-        );
-
-        SciencePlan test = new SciencePlanAdapter(oursciplan);
-
-        System.out.println("\n SciencePlan : \n" +
-                "\nID : "  + test.getPlanNo()+
-                "\nstatus : " + test.getStatus()+
-                "\nstartDate : " + test.getStartDate()+
-                "\nendDate : " + test.getEndDate()+
-                "\ngetObjectives ; " + test.getObjectives()+
-                "\ngetStarSystem : "+ test.getStarSystem()+
-                "\ngetfunding : " + test.getFundingInUSD()+
-                "\ncreater : " + test.getCreator()+
-                "\nsubmitter : " + test.getSubmitter()+
-                "\narray : " + test.getDataProcRequirements()
-        );
-
-        if (oursciplan != null)
-            result = o.testSciencePlan(new SciencePlanAdapter(oursciplan));
-
-        System.out.println(result);
-
-
+        if (oursciplan != null){
+            result = o.testSciencePlan(o.getSciencePlanByNo(Integer.parseInt(planId)));}
+        if (o.getSciencePlanByNo(Integer.parseInt(planId)).getStatus().equals(SciencePlan.STATUS.TESTED)){
+            oursciplan.setStatus(SciencePlan.STATUS.TESTED);
+            sciplanRepository.save(oursciplan);
+        }
         return "redirect:/dashboard";
     }
 
+    @CrossOrigin
+    @GetMapping("/submission")
+    public String submission(Model model, HttpSession session) throws ParseException {
+        User user = (User) session.getAttribute("loggininUser");
+        if (user == null) return "redirect:/login";
 
-//    @CrossOrigin
-//    @GetMapping("/submission")
-//    public String submission(Model model, HttpSession session) throws ParseException {
-//        User user = (User) session.getAttribute("loggininUser");
-//        if (user != null) {
-//            model.addAttribute("username", user.getName());
-//        } else {
-//            return "redirect:/login";
-//        }
-//        ArrayList<SciencePlan> allSciencePlans = o.getAllSciencePlans();
-//        ArrayList<SciencePlan> savedSciencePlans = new ArrayList<>();
-//        for (SciencePlan sp : allSciencePlans) {
-//            if (sp.getStatus().equals(SciencePlan.STATUS.SAVED)) {
-//                savedSciencePlans.add(sp);
-//            }
-//        }
-//
-//        ArrayList<OurSciencePlan> oursavedSciencePlans = new ArrayList<>();
-//        for (SciencePlan plan : savedSciencePlans) {
-//            oursavedSciencePlans.add(new OurSciencePlanAdapter(plan));
-//        }
-//        model.addAttribute("plans", oursavedSciencePlans);
-//        return "submit";
-//    }
-//
-//
-//    @PostMapping("/submission")
-//    public String handleSubmission(@RequestParam("planId") String planId, Model model, HttpSession session) throws ParseException {
-//        User user = (User) session.getAttribute("loggininUser");
-//        if (user != null) {
-//            model.addAttribute("username", user.getName());
-//        } else {
-//            return "redirect:/login";
-//        }
-//
-//        String submitResult = "";
-//
-//        ArrayList<SciencePlan> allSciencePlans = o.getAllSciencePlans();
-//        ArrayList<OurSciencePlan> ourSciencePlans = new ArrayList<>();
-//        for (SciencePlan plan : allSciencePlans) {
-//            ourSciencePlans.add(new OurSciencePlanAdapter(plan));
-//        }
-//
-//        for (OurSciencePlan sp : ourSciencePlans) {
-//            if (sp.getPlanNo() == Integer.parseInt(planId)) {
-//                if (sp.getStatus().equals(SciencePlan.STATUS.TESTED)) {
-//                    sp.setSubmitterUser(user);
-//                    submitResult = o.submitSciencePlan(new SciencePlanAdapter(sp));
-//                    model.addAttribute("submitResult", submitResult);
-//                    return "submitResult";
-//                }
-//            }
-//            submitResult = o.submitSciencePlan(new SciencePlanAdapter(sp));
-//        }
-//
-//        model.addAttribute("submitResult", submitResult);
-//        return "submitResult";
-//    }
+        Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
+        ArrayList<OurSciencePlan> ourtestedsciplans = new ArrayList<>();
+
+        for (OurSciencePlan plan: ourplans){
+            if (plan.getStatus().equals(SciencePlan.STATUS.TESTED)) {
+                ourtestedsciplans.add(plan);
+            }
+        }
+        model.addAttribute("plans", ourtestedsciplans);
+        return "submit";
+    }
+
+    @PostMapping("/submission")
+    public String handleSubmission(@RequestParam("planId") String planId, Model model, HttpSession session) throws ParseException {
+        User user = (User) session.getAttribute("loggininUser");
+        if (user == null) return "redirect:/login";
+
+        String submitResult = "";
+        Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
+        OurSciencePlan oursciplan = null;
+        String result = "";
+
+        for (OurSciencePlan plan : ourplans) {
+            if (plan.getPlanNo() == Integer.parseInt(planId)) {
+                oursciplan = plan;
+            }
+        }
+
+        if (oursciplan != null){
+            submitResult = o.submitSciencePlan(o.getSciencePlanByNo(Integer.parseInt(planId)));}
+        if (o.getSciencePlanByNo(Integer.parseInt(planId)).getStatus().equals(SciencePlan.STATUS.SUBMITTED)){
+            oursciplan.setStatus(SciencePlan.STATUS.SUBMITTED);
+            oursciplan.setSubmitter(user);
+            sciplanRepository.save(oursciplan);
+        }
+
+        model.addAttribute("submitResult", submitResult);
+        return "submitResult";
+    }
 
 
 }

@@ -186,28 +186,4 @@ public class OurSciencePlan implements Serializable {
         this.status = status;
     }
 
-
-
-
-    public static enum TELESCOPELOC {
-        HAWAII,
-        CHILE;
-
-        private TELESCOPELOC() {
-        }
-    }
-
-    public static enum STATUS {
-        SAVED,
-        COMPLETE,
-        TESTED,
-        CANCELLED,
-        RUNNING,
-        SUBMITTED,
-        VALIDATED,
-        INVALIDATED;
-
-        private STATUS() {
-        }
-    }
 }
