@@ -25,7 +25,7 @@ public class SciencePlanAdapter extends SciencePlan {
             setFundingInUSD(ourPlan.getFundingInUSD());
             setObjectives(ourPlan.getObjectives());
             setStarSystem(StarSystem.CONSTELLATIONS.valueOf(ourPlan.getStarSystem().name()));
-
+            setStatus(ourPlan.getStatus());
             Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(ourPlan.getStartDate());
             setStartDate(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(startDate));
 

@@ -6,8 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import Demo.model.OurSciencePlan;
+import Demo.model.SciencePlanAdapter;
 import Demo.model.User;
 import Demo.repository.sciplan.SciplanRepository;
+import edu.gemini.app.ocs.OCS;
 import edu.gemini.app.ocs.model.DataProcRequirement;
 import edu.gemini.app.ocs.model.SciencePlan;
 import edu.gemini.app.ocs.model.StarSystem;
@@ -86,14 +88,20 @@ public class DemoController {
 //        return "Dashboard";
 //    }
 
+
     @GetMapping("/CreateSciPlan")
-    public String CreateSciPlan(Model model) {
+    public String CreateSciPlan(Model model, HttpSession session) {
+
+        User user = (User) session.getAttribute("loggininUser");
+        if (user == null) return "redirect:/login";
 
         model.addAttribute("CONSTELLATIONS", StarSystem.CONSTELLATIONS.values());
         model.addAttribute("TELESCOPELOC", SciencePlan.TELESCOPELOC.values());
 
         return "CreateSciPlan";
     }
+
+
 
 
     @PostMapping("/CreateSciPlan")
@@ -116,8 +124,12 @@ public class DemoController {
             @RequestParam("whites") double whites,
             @RequestParam("blacks") double blacks,
             @RequestParam("luminance") double luminance,
-            @RequestParam("hue") double hue
+            @RequestParam("hue") double hue,
+            HttpSession session
     ) throws ParseException, ClassNotFoundException, SQLException {
+
+        User user = (User) session.getAttribute("loggininUser");
+        if (user == null) return "redirect:/login";
 
         //Date input example _startDate:2024-04-26_endDate:2024-07-25
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -133,8 +145,8 @@ public class DemoController {
         );
 
         OurSciencePlan newOurSciPlan = new OurSciencePlan(
-                UserController.getLoginUser(),
-                UserController.getLoginUser(),  // <--- need to fix to be null or smt
+                user,
+                user,  // <--- need to fix to be null or smt
                 funding,
                 objectives,
                 constellation,
@@ -156,48 +168,81 @@ public class DemoController {
         return "redirect:/dashboard";
     }
 
-//    @GetMapping("/testing")
-//    public String testSciPlan(Model model, HttpSession session) throws ParseException {
-//        Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
-//        ArrayList<OurSciencePlan> oursavedsciplans = new ArrayList<>();
-//        for (OurSciencePlan plan: ourplans){
-//            if (plan.getStatus().equals(SciencePlan.STATUS.SAVED)) {
-//                oursavedsciplans.add(plan);
-//            }
-//        }
-//
-//
-//        for (SciencePlan plan : sciencePlans) {
-//            ourSciencePlans.add(new OurSciencePlanAdapter(plan));
-//        }
-//
-//        for (OurSciencePlan sp : ourSciencePlans) {
-//            if (sp.getStatus().equals(SciencePlan.STATUS.SAVED)) {
-//                savedSciencePlans.add(sp);
-//            }
-//        }
-//        model.addAttribute("plans", savedSciencePlans);
-//
-//        return "testing";
-//    }
-//
-//    @PostMapping("/testing")
-//    public String handelTestSciPlan(@RequestParam("planId") String planId, Model model, HttpSession session) throws ParseException {
-//        User user = (User) session.getAttribute("loggininUser");
-//        if (user != null) {
-//            model.addAttribute("username", user.getName());
-//        } else {
-//            return "redirect:/login";
-//        }
-//
-//        OCS o = new OCS();
-//        SciencePlan testPlan = o.getSciencePlanByNo(Integer.parseInt(planId));
-//        String result = o.testSciencePlan(testPlan);
-//        System.out.println("\n\nresult of sciPLan ID:" + Integer.parseInt(planId) + result);
-//        return "redirect:/dashboard";
-//    }
-//
-//
+    @GetMapping("/testing")
+    public String testSciPlan(Model model, HttpSession session) throws ParseException {
+        User user = (User) session.getAttribute("loggininUser");
+        if (user == null) return "redirect:/login";
+
+        Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
+        ArrayList<OurSciencePlan> oursavedsciplans = new ArrayList<>();
+
+        for (OurSciencePlan plan: ourplans){
+            if (plan.getStatus().equals(SciencePlan.STATUS.SAVED)) {
+                oursavedsciplans.add(plan);
+            }
+        }
+
+
+        model.addAttribute("plans", oursavedsciplans);
+
+        return "testing";
+    }
+
+    @PostMapping("/testing")
+    public String handelTestSciPlan(@RequestParam("planId") String planId, Model model, HttpSession session) throws ParseException {
+        User user = (User) session.getAttribute("loggininUser");
+        if (user == null) return "redirect:/login";
+
+
+        OCS o = new OCS();
+        Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
+        OurSciencePlan oursciplan = null;
+        String result = "";
+
+        for (OurSciencePlan plan : ourplans) {
+            if (plan.getPlanNo() == Integer.parseInt(planId)) {
+                oursciplan = plan;
+            }
+        }
+
+        System.out.println("\n oursciplan : \n" +
+                "\nID : "  + oursciplan.getPlanNo()+
+                "\nstatus : " + oursciplan.getStatus()+
+                "\nstartDate : " + oursciplan.getStartDate()+
+                "\nendDate : " + oursciplan.getEndDate()+
+                "\ngetObjectives ; " + oursciplan.getObjectives()+
+                "\ngetStarSystem : "+ oursciplan.getStarSystem()+
+                "\ngetfunding : " + oursciplan.getFundingInUSD()+
+                "\ncreater : " + oursciplan.getCreator()+
+                "\nsubmitter : " + oursciplan.getSubmitter()+
+                "\narray : " + oursciplan.getDataProcRequirements()
+        );
+
+        SciencePlan test = new SciencePlanAdapter(oursciplan);
+
+        System.out.println("\n SciencePlan : \n" +
+                "\nID : "  + test.getPlanNo()+
+                "\nstatus : " + test.getStatus()+
+                "\nstartDate : " + test.getStartDate()+
+                "\nendDate : " + test.getEndDate()+
+                "\ngetObjectives ; " + test.getObjectives()+
+                "\ngetStarSystem : "+ test.getStarSystem()+
+                "\ngetfunding : " + test.getFundingInUSD()+
+                "\ncreater : " + test.getCreator()+
+                "\nsubmitter : " + test.getSubmitter()+
+                "\narray : " + test.getDataProcRequirements()
+        );
+
+        if (oursciplan != null)
+            result = o.testSciencePlan(new SciencePlanAdapter(oursciplan));
+
+        System.out.println(result);
+
+
+        return "redirect:/dashboard";
+    }
+
+
 //    @CrossOrigin
 //    @GetMapping("/submission")
 //    public String submission(Model model, HttpSession session) throws ParseException {
