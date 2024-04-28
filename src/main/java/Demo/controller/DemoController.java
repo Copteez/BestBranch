@@ -99,7 +99,12 @@ public class DemoController {
     }
 
     @GetMapping("/CreateSciPlan")
-    public String CreateSciPlan(Model model) {
+    public String CreateSciPlan(Model model, HttpSession session) {
+
+        User user = (User) session.getAttribute("loggininUser");
+        if (user == null) {
+            return "redirect:/login";
+        }
 
         model.addAttribute("CONSTELLATIONS", StarSystem.CONSTELLATIONS.values());
         model.addAttribute("TELESCOPELOC", SciencePlan.TELESCOPELOC.values());
@@ -127,8 +132,11 @@ public class DemoController {
             @RequestParam("whites") double whites,
             @RequestParam("blacks") double blacks,
             @RequestParam("luminance") double luminance,
-            @RequestParam("hue") double hue
+            @RequestParam("hue") double hue,
+            HttpSession session
     ) throws ParseException {
+
+        User user = (User) session.getAttribute("loggininUser");
 
         //Date input example _startDate:2024-04-26_endDate:2024-07-25
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -144,8 +152,8 @@ public class DemoController {
         );
 
         OurSciencePlan newOurSciPlan = new OurSciencePlan(
-                UserController.getLoginUser(),
-                UserController.getLoginUser(),  // <--- need to fix to be null or smt
+                user,
+                user,  // <--- need to fix to be null or smt
                 funding,
                 objectives,
                 constellation,
@@ -163,6 +171,12 @@ public class DemoController {
 
     @GetMapping("/testing")
     public String testSciPlan(Model model, HttpSession session) throws ParseException {
+
+        User user = (User) session.getAttribute("loggininUser");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
         ArrayList<SciencePlan> sciencePlans = o.getAllSciencePlans();
         ArrayList<OurSciencePlan> ourSciencePlans = new ArrayList<>();
         ArrayList<SciencePlan> savedSciencePlans = new ArrayList<>();
