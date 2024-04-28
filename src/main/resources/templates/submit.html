@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,7 +81,7 @@
                     <!-- Dynamically filled details will appear here -->
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="cancel-btn" th:href="@{templates/dashboard.html}">Cancel</a></button>
+                    <a href="/dashboard"  button type="button" class="cancel-btn">Cancel</button></a>
                     <button type="submit" class="submit-btn" th:href="@{templates/submitResult.html}">Submission</a></button>
                 </div>
             </form>
