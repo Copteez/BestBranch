@@ -3,8 +3,7 @@ package Demo.model;
 import edu.gemini.app.ocs.model.DataProcRequirement;
 import edu.gemini.app.ocs.model.SciencePlan;
 import edu.gemini.app.ocs.model.StarSystem;
-import edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC;
-import edu.gemini.app.ocs.model.SciencePlan.STATUS;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,11 +16,11 @@ public class SciencePlanAdapter extends SciencePlan {
         super();
         if (plan != null) {
             this.ourPlan = plan;
-            setCreator(ourPlan.getCreatorUser().getName());
+            setCreator(ourPlan.getCreator().getName());
             if (plan.getSubmitter().equals(null)){
                 setSubmitter("");
             }else{
-                setSubmitter(ourPlan.getSubmitterUser().getName());
+                setSubmitter(ourPlan.getSubmitter().getName());
             }
             setFundingInUSD(ourPlan.getFundingInUSD());
             setObjectives(ourPlan.getObjectives());

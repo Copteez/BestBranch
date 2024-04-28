@@ -1,15 +1,13 @@
 package Demo.controller;
 
 import Demo.model.User;
-import Demo.repository.UserRepository;
-import edu.gemini.app.ocs.OCS;
+import Demo.repository.user.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
@@ -19,7 +17,6 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-    static OCS o = new OCS();
     private static User loginUser;
 
     public static User getLoginUser() {
@@ -39,7 +36,7 @@ public class UserController {
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             session.setAttribute("loggininUser", user.get());
             this.loginUser = user.get();
-            return "redirect:/dashboard";
+            return "redirect:/CreateSciPlan";
         } else {
             return "redirect:/login";
         }
