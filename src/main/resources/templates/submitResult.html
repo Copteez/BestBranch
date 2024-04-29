@@ -2,11 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Submission Successful</title>
   <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">
   <link rel="stylesheet" th:href="@{assets/css/submitResult.css}">
-  <!-- <link rel="stylesheet" href="..\resources\assets\css\submitResult.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
+
 <body>
 <!-- Container for greeting message and menu -->
 <div class="container">
@@ -35,11 +37,10 @@
     </div>
   </div>
 </div>
-
 <div class="result-container">
-  <!-- Add your result content here -->
-  <p>Congratulations! Your science plan has been successfully tested.</p>
-  <a th:href="@{/dashboard}" class="back-button">Back to Dashboard</a>
+  <div class="plan-list-header">
+    <h3>Congratulations! Your science plan has been successfully tested.</h3>
+  </div>
 </div>
 
 </body>

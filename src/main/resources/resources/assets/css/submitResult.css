@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -32,17 +33,16 @@ body, html {
   font-size: 26px;
   font-weight: 600;
   letter-spacing: 0.26px;
-  word-wrap: break-word
+  word-wrap: break-word;
 }
 
-.menu-version{
+.menu-version {
   color: #838383;
   font-size: 10px;
   font-weight: 500;
   word-wrap: break-word;
   margin-top: 10px;
 }
-
 
 .menu ul {
   list-style-type: none;
@@ -55,7 +55,7 @@ body, html {
 }
 
 .menu ul li a {
-  color: #9197B3;
+  color: #9197b3;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
@@ -77,7 +77,7 @@ body, html {
 }
 
 .menu ul li a:hover {
-  background-color: #5932EA;
+  background-color: #5932ea;
   color: white;
 }
 
@@ -93,7 +93,7 @@ body, html {
 
 .profile a {
   text-decoration: none;
-  color: #9197B3;
+  color: #9197b3;
   display: flex;
   align-items: center;
   padding: 15px;
@@ -101,7 +101,7 @@ body, html {
 }
 
 .profile a:hover {
-  background-color: #5932EA;
+  background-color: #5932ea;
   color: white;
 }
 
@@ -136,5 +136,32 @@ body, html {
   color: black;
   font-size: 24px;
   font-weight: 500;
-  word-wrap: break-word
+  word-wrap: break-word;
+}
+/* result */
+.result-container {
+  text-align: center; /* Center the content horizontally */
+  border: 1px solid #ccc; /* Optional: Add border for visual clarity */
+  padding: 20px;
+}
+
+.plan-list {
+  background-color: #ffffff;
+  padding: 30px;
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 20%; /* Add margin to separate it from other content */
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 4px 50px rgba(0, 0, 150, 0.1);
+  display: flex;
+  flex-direction: column; /* Change the direction to column */
+  align-items: flex-start;
+}
+
+.plan-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
 }
