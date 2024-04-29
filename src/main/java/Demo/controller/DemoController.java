@@ -61,34 +61,25 @@ public class DemoController {
         return "Dashboard";
     }
 
-//    // Show SciencePlan detail
-//    @CrossOrigin
-//    @GetMapping("/sciPlan/{id}")
-//    public @ResponseBody String getSciencePlanByNo(@PathVariable("id") String id, Model model, HttpSession session) throws ParseException {
-//        User user = (User) session.getAttribute("loggininUser");
-//        if (user != null) {
-//            model.addAttribute("username", user.getName());
-//        } else {
-//            return "redirect:/login";
-//        }
-//
-//        ArrayList<SciencePlan> sciencePlans = o.getAllSciencePlans();
-//
-//        ArrayList<OurSciencePlan> ourSciencePlans = new ArrayList<>();
-//        for (SciencePlan plan : sciencePlans) {
-//            ourSciencePlans.add(new OurSciencePlanAdapter(plan));
-//        }
-//
-//        if (id != null) {
-//            for (OurSciencePlan sp : ourSciencePlans) {
-//                if (sp.getPlanNo() == Integer.parseInt(id)) {
-//                    model.addAttribute("plans", (sp));
-//                    return "Dashboard"; // Wait for Sciplan detial html file
-//                }
-//            }
-//        }
-//        return "Dashboard";
-//    }
+    // Show SciencePlan detail
+    @CrossOrigin
+    @GetMapping("/sciPlan/{id}")
+    public @ResponseBody String getSciencePlanByNo(@PathVariable("id") String id, Model model, HttpSession session) throws ParseException {
+        User user = (User) session.getAttribute("loggininUser");
+        if (user != null) {
+            model.addAttribute("username", user.getName());
+        } else {
+            return "redirect:/login";
+        }
+
+        Optional<OurSciencePlan> oursciplan = sciplanRepository.findById(Integer.parseInt(id));
+
+        if (oursciplan.isPresent()) {
+            model.addAttribute("plans", (oursciplan));
+            return "SciplanDetail";
+        }
+        return "SciplanDetail";
+    }
 
 
     @GetMapping("/CreateSciPlan")

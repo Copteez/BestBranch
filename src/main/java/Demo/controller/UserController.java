@@ -36,7 +36,7 @@ public class UserController {
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             session.setAttribute("loggininUser", user.get());
             this.loginUser = user.get();
-            return "redirect:/CreateSciPlan";
+            return "redirect:/dashboard";
         } else {
             return "redirect:/login";
         }
