@@ -190,8 +190,12 @@ public class DemoController {
         if (o.getSciencePlanByNo(Integer.parseInt(planId)).getStatus().equals(SciencePlan.STATUS.TESTED)){
             oursciplan.setStatus(SciencePlan.STATUS.TESTED);
             sciplanRepository.save(oursciplan);
+            model.addAttribute("testResult", "TESTED SUCCESSFULLY!!! 🤩🤩🤩");
+        }else {
+            model.addAttribute("testResult", "TESTED UNSUCCESSFULLY 😒🤮😭");
         }
-        return "redirect:/dashboard";
+
+        return "testingResult";
     }
 
     @CrossOrigin
