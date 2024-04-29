@@ -260,3 +260,21 @@ button {
 button:hover {
     background-color: #eb9900;
 }
+
+.plan-detail:hover {
+    background-color: #16C098;
+    cursor: pointer;
+    color: white;
+}
+
+.plan-detail-row {
+    background-color: #f9f9f9; /* Background color for detail row */
+}
+
+.plan-detail-content {
+    padding: 10px; /* Add padding to detail content */
+}
+
+.plan-details-container {
+    display: none;
+}

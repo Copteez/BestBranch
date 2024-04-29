@@ -77,7 +77,7 @@
     <div class="plan-list">
         <div class="plan-list-header">
             <div class="description-plan">
-                <h2>Plan Waiting for Submission</h2>
+                <h2>All Science Plans</h2>
                 <span>List of Plan</span>
             </div>
         </div>
@@ -95,22 +95,54 @@
             </tr>
             </thead>
             <tbody>
-            <tbody >
-                    <tr th:each="plan : ${plans}">
-<!--                        <td th:text="${plan.planNo}"></td>-->
-                        <td><form th:action="@{/sciPlan/{id}(id=${plan.planNo})}" method="get"><button type="submit" th:text="${plan.planNo}">Plan Details</button></form></td>
-                        <td th:text="${plan.starSystem}"></td>
-                        <td th:text="${plan.creator.getName()}"></td>
-                        <td th:text="${plan.submitter.getName()}"></td>
-                        <td th:text="${plan.startDate}"></td>
-                        <td th:text="${plan.endDate}"></td>
-                        <td th:text="${plan.telescopeLocation}"></td>
-                        <td th:text="${plan.status}"></td>
-                    </tr>
+            <tr th:each="plan, rowStat : ${plans}" class="plan-detail">
+                <td th:text="${plan.planNo}"></td>
+                <td th:text="${plan.starSystem}"></td>
+                <td th:text="${plan.creator.getName()}"></td>
+                <td th:text="${plan.submitter.getName()}"></td>
+                <td th:text="${plan.startDate}"></td>
+                <td th:text="${plan.endDate}"></td>
+                <td th:text="${plan.telescopeLocation}"></td>
+                <td th:text="${plan.status}"></td>
+            </tr>>
             </tbody>
         </table>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var rows = document.querySelectorAll(".plan-detail");
+        rows.forEach(function(row) {
+            row.addEventListener("click", function() {
+                // Get the next row (details row)
+                var detailsRow = this.nextElementSibling;
+
+                // Toggle visibility of the details row
+                if (detailsRow && detailsRow.classList.contains("details")) {
+                    // If details row exists, toggle its display property
+                    if (detailsRow.style.display === "none") {
+                        detailsRow.style.display = "table-row"; // Show the details
+                    } else {
+                        detailsRow.style.display = "none"; // Hide the details
+                    }
+                } else {
+                    // If details row doesn't exist, create and insert it
+                    var newDetailsRow = document.createElement("tr");
+                    newDetailsRow.classList.add("details");
+                    var detailsCell = document.createElement("td");
+                    detailsCell.setAttribute("colspan", "8");
+                    var detailsContent = document.createElement("div");
+                    detailsContent.innerHTML = "<h2>Data Process Requirement</h2><p>Detail 2:</p><p>Detail 3: ...</p>";
+                    detailsCell.appendChild(detailsContent);
+                    newDetailsRow.appendChild(detailsCell);
+                    this.parentNode.insertBefore(newDetailsRow, this.nextSibling);
+                }
+            });
+        });
+    });
+</script>
+
+
 
 </body>
 </html>
