@@ -272,3 +272,35 @@ button:hover {
 .plan-details-container {
     display: none;
 }
+
+/* CSS for the Data Processing Requirements list */
+.plan-list th, .plan-list td {
+    padding: 10px; /* Add padding to cells */
+    border-bottom: #EEEEEE solid 1px;
+    text-align: left; /* Align text to the left */
+}
+
+.plan-list th {
+    background-color: #FFFFFF; /* Background color for header */
+}
+
+.plan-detail-row {
+    background-color: #f9f9f9; /* Background color for detail row */
+}
+
+.plan-detail-content {
+    padding: 10px; /* Add padding to detail content */
+}
+
+.plan-details-container {
+    display: none;
+}
+
+.plan-list ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+}
+
+.plan-list li {
+    margin-bottom: 5px; /* Add margin between list items */
+}
