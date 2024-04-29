@@ -62,6 +62,7 @@ public class OurSciencePlan implements Serializable {
         this.dataProcRequirements.add(dataProcRequirements);
     }
 
+
     public User getCreator() {
         return this.creator;
     }

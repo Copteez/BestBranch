@@ -54,7 +54,7 @@ public class DemoController {
 
             curplan++;
             oursciplans.add(plan);
-            o.createSciencePlan(new SciencePlanAdapter(plan));
+            o.createSciencePlan(SciencePlanAdapter.convertToSciencePlan(plan));
             o.updateSciencePlanStatus(curplan, plan.getStatus());
         }
 
@@ -64,48 +64,6 @@ public class DemoController {
         model.addAttribute("totalPlans", oursciplans.size());
         return "Dashboard";
     }
-
-    // Show SciencePlan detail
-    @CrossOrigin
-    @GetMapping("/sciPlan/{id}")
-    public @ResponseBody String getSciencePlanByNo(@PathVariable("id") String id, Model model, HttpSession session) throws ParseException {
-        User user = (User) session.getAttribute("loggininUser");
-        if (user != null) {
-            model.addAttribute("username", user.getName());
-        } else {
-            return "redirect:/login";
-        }
-
-        Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
-        OurSciencePlan oursciplan = null;
-        String result = "";
-
-        for (OurSciencePlan plan : ourplans) {
-            if (plan.getPlanNo() == Integer.parseInt(id)) {
-                oursciplan = plan;
-            }
-        }
-
-        System.out.println("\n oursciplan : \n" +
-                "\nID : "  + oursciplan.getPlanNo()+
-                "\nstatus : " + oursciplan.getStatus()+
-                "\nstartDate : " + oursciplan.getStartDate()+
-                "\nendDate : " + oursciplan.getEndDate()+
-                "\ngetObjectives ; " + oursciplan.getObjectives()+
-                "\ngetStarSystem : "+ oursciplan.getStarSystem()+
-                "\ngetfunding : " + oursciplan.getFundingInUSD()+
-                "\ncreater : " + oursciplan.getCreator().getName()+
-                "\nsubmitter : " + oursciplan.getSubmitter().getName()+
-                "\narray : " + oursciplan.getDataProcRequirements()
-        );
-
-        if (oursciplan != null) {
-            model.addAttribute("plans", (oursciplan));
-            return "SciplanDetail";
-        }
-        return "redirect:/dashboard";
-    }
-
 
     @GetMapping("/CreateSciPlan")
     public String CreateSciPlan(Model model, HttpSession session) {
@@ -183,7 +141,7 @@ public class DemoController {
         newOurSciPlan.setStatus(SciencePlan.STATUS.SAVED);
 
         sciplanRepository.save(newOurSciPlan);
-        o.createSciencePlan(new SciencePlanAdapter(newOurSciPlan));
+        o.createSciencePlan(SciencePlanAdapter.convertToSciencePlan(newOurSciPlan));
 
         return "redirect:/dashboard";
     }
