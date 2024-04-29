@@ -15,7 +15,7 @@
 <div class="container">
     <!-- Greeting message -->
     <div class="greeting-message">
-        <h1>Hello, <span th:text="${username}"></span>! 🌚🌝
+        <h1>Submitting A Science Plan</h1>
         </h1>
     </div>
     <!-- Menu -->
@@ -47,7 +47,6 @@
         <div class="plan-list-header">
             <div class="description-plan">
                 <h2>Plan Waiting for Submission</h2>
-                <span>List of Plan</span>
             </div>
             <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
         </div>
@@ -68,28 +67,27 @@
             </tr>
             </thead>
             <tbody>
-            <tbody>
-            <tr th:each="plan : ${plans}">
+            <tr th:each="plan : ${plans}" th:if="${hasPlans}">
                 <td th:text="${plan.planNo}"></td>
                 <td th:text="${plan.starSystem}"></td>
-                <td th:text="${plan.creator}"></td>
-                <td th:text="${plan.submitter}"></td>
+                <td th:text="${plan.creator.getName()}"></td>
+                <td th:text="${plan.submitter.getName()}"></td>
                 <td th:text="${plan.objectives}"></td>
                 <td th:text="${plan.fundingInUSD}"></td>
                 <td th:text="${plan.startDate}"></td>
                 <td th:text="${plan.endDate}"></td>
                 <td th:text="${plan.telescopeLocation}"></td>
                 <td th:text="${plan.status}"></td>
-                <td class="submit-cell"> <!-- Added a class for styling -->
+                <td class="submit-cell">
                     <form th:action="@{/submission}" method="post">
-                        <input type="hidden" name="planId" th:value="${plan.planNo}" />
-                        <a th:href="@{/dashboard}"  button type="cancel" class="cancel-btn">Cancel</button></a></button>
-                        <a th:href="@{/submitResult}" button type="submit" class="submit-btn">Submission</a></button>
+                        <button type="submit" th:value="${plan.planNo}" th:text="${plan.planNo}" id="planId" name="planId" class="submit-btn">Test</button>
                     </form>
                 </td>
             </tr>
             </tbody>
         </table>
+        <tr th:if="${!hasPlans}" th:text="${plans}">
+        </tr>
     </div>
 </div>
 
