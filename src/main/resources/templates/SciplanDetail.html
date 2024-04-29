@@ -13,7 +13,8 @@
 <!-- Container for greeting message and menu -->
 <div class="container">
     <div class="close-icon-container">
-        <a th:href="@{/dashboard}"><i class="fas fa-times"></i></a>
+        <!-- <a th:href="@{/dashboard}"><i class="fas fa-times"></i></a> -->
+        <a href="javascript:history.back()"><i class="fas fa-times"></i></a>
     </div>    
     <!-- Greeting message -->
     <div class="greeting-message">
@@ -68,6 +69,8 @@
                 <td th:text="${plan.endDate}"></td>
             </tr>
             </tbody>
+        </table>
+        <table>
 
             <thead>
                 <tr>
