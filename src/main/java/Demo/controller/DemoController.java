@@ -51,9 +51,11 @@ public class DemoController {
             if (plan.getStatus().equals(SciencePlan.STATUS.SUBMITTED)) {
                 submittedPlan++;
             }
+
             curplan++;
             oursciplans.add(plan);
             o.createSciencePlan(new SciencePlanAdapter(plan));
+            o.updateSciencePlanStatus(curplan, plan.getStatus());
         }
 
         model.addAttribute("draftPlan", savedplan);
@@ -200,9 +202,13 @@ public class DemoController {
             }
         }
 
-
-        model.addAttribute("plans", oursavedsciplans);
-
+        if (oursavedsciplans.isEmpty()) {
+            model.addAttribute("plans", "No Science plan to test");
+            model.addAttribute("hasPlans", false);
+        } else {
+            model.addAttribute("plans", oursavedsciplans);
+            model.addAttribute("hasPlans", true);
+        }
         return "testing";
     }
 
@@ -244,7 +250,13 @@ public class DemoController {
                 ourtestedsciplans.add(plan);
             }
         }
-        model.addAttribute("plans", ourtestedsciplans);
+        if (ourtestedsciplans.isEmpty()) {
+            model.addAttribute("plans", "No Science plan to submit");
+            model.addAttribute("hasPlans", false);
+        } else {
+            model.addAttribute("plans", ourtestedsciplans);
+            model.addAttribute("hasPlans", true);
+        }
         return "submit";
     }
 
@@ -266,11 +278,16 @@ public class DemoController {
 
         if (oursciplan != null){
             submitResult = o.submitSciencePlan(o.getSciencePlanByNo(Integer.parseInt(planId)));}
+
+        System.out.println("o.getSciencePlanByNo(Integer.parseInt(planId)).getStatus() ->>>>> "+o.getSciencePlanByNo(Integer.parseInt(planId)).getStatus());
+
         if (o.getSciencePlanByNo(Integer.parseInt(planId)).getStatus().equals(SciencePlan.STATUS.SUBMITTED)){
             oursciplan.setStatus(SciencePlan.STATUS.SUBMITTED);
             oursciplan.setSubmitter(user);
             sciplanRepository.save(oursciplan);
         }
+
+
 
         model.addAttribute("submitResult", submitResult);
         return "submitResult";
