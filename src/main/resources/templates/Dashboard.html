@@ -14,8 +14,7 @@
 <div class="container">
     <!-- Greeting message -->
     <div class="greeting-message">
-        <h1>Hello, <span th:text="${username}"></span>! 🌚🌝
-        </h1>
+        <h1>Hello, <span th:text="${username}"></span>! 🌚🌝</h1>
     </div>
     <!-- Menu -->
     <div class="menu">
@@ -81,19 +80,6 @@
                 <h2>Plan Waiting for Submission</h2>
                 <span>List of Plan</span>
             </div>
-            <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
-            <div class="search-and-sort">
-                <label>
-                    <input type="text" placeholder="Search...">
-                </label>
-                <div class="sort-options">
-                    <label for="sort">Sort by:</label>
-                    <select id="sort">
-                        <option value="newest">Newest</option>
-                        <option value="oldest">Oldest</option>
-                    </select>
-                </div>
-            </div>
         </div>
         <table>
             <thead>
@@ -110,16 +96,17 @@
             </thead>
             <tbody>
             <tbody>
-            <tr th:each="plan : ${plans}">
-                                <td th:text="${plan.planNo}"></td>
-                                <td th:text="${plan.starSystem}"></td>
-                                <td th:text="${plan.creator.getName()}"></td>
-                                <td th:text="${plan.submitter.getName()}"></td>
-                                <td th:text="${plan.startDate}"></td>
-                                <td th:text="${plan.endDate}"></td>
-                                <td th:text="${plan.telescopeLocation}"></td>
-                                <td th:text="${plan.status}"></td>
-            </tr>
+                    <tr th:each="plan : ${plans}">
+<!--                        <td th:text="${plan.planNo}"></td>-->
+                        <td><form th:action="@{/sciPlan/{id}(id=${plan.planNo})}" method="get"><button type="submit" th:text="${plan.planNo}">Plan Details</button></form></td>
+                        <td th:text="${plan.starSystem}"></td>
+                        <td th:text="${plan.creator.getName()}"></td>
+                        <td th:text="${plan.submitter.getName()}"></td>
+                        <td th:text="${plan.startDate}"></td>
+                        <td th:text="${plan.endDate}"></td>
+                        <td th:text="${plan.telescopeLocation}"></td>
+                        <td th:text="${plan.status}"></td>
+                    </tr>
             </tbody>
         </table>
     </div>
