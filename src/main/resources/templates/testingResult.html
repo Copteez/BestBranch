@@ -18,7 +18,7 @@
     <!-- Menu -->
     <div class="menu">
         <div class="logo-container">
-            <img src="../static/images/Logo_circle.png" alt="Logo" class="logo">
+            <img th:src="@{images/Logo_circle.png}" alt="Logo" class="logo">
             <span class="menu-text">Testing</span>
             <span class="menu-version">V0.1</span>
         </div>
@@ -39,7 +39,7 @@
 
 <div class="result-container">
     <!-- Add your result content here -->
-    <p>Congratulations! Your science plan has been successfully tested.</p>
+    <p th:text="${testResult}"></p>
     <a th:href="@{/dashboard}" class="back-button">Back to Dashboard</a>
 </div>
 </body>

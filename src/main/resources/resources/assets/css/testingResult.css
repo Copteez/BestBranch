@@ -139,16 +139,6 @@ body, html {
     word-wrap: break-word
 }
 
-.back-button {
-    height: 50px;
-    background-color: orange;
-    border: none; /* Remove default border */
-    border-radius: 10px;
-    font-weight: bold;
-    padding-top:30px;
-    text-align: center;
-}
-
 .result-container{
     display: flex;
     flex-direction: column;
@@ -156,8 +146,17 @@ body, html {
     margin-right: 30%;
     margin-top: 10%;
     justify-content: center;
+    align-items: center;
 }
 
+.result-container a{
+    background-color: orange;
+    padding: 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: black;
+}
 .result-container a:hover{
     color: white;
+    background-color: #5932EA;
 }
