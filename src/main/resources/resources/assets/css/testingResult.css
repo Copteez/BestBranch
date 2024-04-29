@@ -150,11 +150,11 @@ body, html {
 }
 
 .result-container a{
-    background-color: orange;
+    background-color: #FFB21E;
     padding: 20px;
     border-radius: 25px;
     text-decoration: none;
-    color: black;
+    color: write;
 }
 .result-container a:hover{
     color: white;

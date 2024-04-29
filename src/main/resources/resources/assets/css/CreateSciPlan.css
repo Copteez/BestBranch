@@ -165,7 +165,8 @@ body, html {
     height: 50px;
     margin-right: 100px;
     margin-left: 100px;
-    background-color: orange;
+    background-color: #FFB21E;
+    color : white;
     border: none; /* Remove default border */
     border-radius: 10px;
     font-weight: bold;

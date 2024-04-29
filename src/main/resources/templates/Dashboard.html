@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Gemini</title>
     <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">
-     <link rel="stylesheet" th:href="@{assets/css/Dashboard.css}">
-<!--    <link rel="stylesheet" href="..\resources\assets\css\Dashboard.css">-->
+    <link rel="stylesheet" th:href="@{assets/css/Dashboard.css}">
+    <!--    <link rel="stylesheet" href="..\resources\assets\css\Dashboard.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
@@ -106,12 +106,36 @@
                 <td th:text="${plan.endDate}"></td>
                 <td th:text="${plan.telescopeLocation}"></td>
                 <td th:text="${plan.status}"></td>
+<!--                <td colspan="8">-->
+<!--                    &lt;!&ndash; Include here the details you want to show for each plan &ndash;&gt;-->
+<!--                    <p>objectives: <span th:text="${plan.objectives}"></span></p>-->
+<!--                    <p>DataProcRequirement: <span th:text="${plan.dataProcRequirements}"></span></p>-->
+<!--                    <p>Funding: <span th:text="${plan.getFundingInUSD()}"></span></p>-->
+<!--                    &lt;!&ndash; Add more details as needed &ndash;&gt;-->
+<!--                </td>-->
                 <td colspan="8">
                     <!-- Include here the details you want to show for each plan -->
                     <p>objectives: <span th:text="${plan.objectives}"></span></p>
-                    <p>DataProcRequirement: <span th:text="${plan.dataProcRequirements}"></span></p>
+                    <p>Data Processing Requirements:</p>
+                    <ul>
+                        <li th:each="requirement : ${plan.dataProcRequirements}">
+                            <span th:text="'File type: ' + ${requirement.fileType}"></span><br>
+                            <span th:text="'File quality: ' + ${requirement.fileQuality}"></span><br>
+                            <span th:text="'Color type: ' + ${requirement.colorType}"></span><br>
+                            <span th:text="'Contrast: ' + ${requirement.contrast}"></span><br>
+                            <span th:text="'Brightness: ' + ${requirement.brightness}"></span><br>
+                            <span th:text="'Saturation: ' + ${requirement.saturation}"></span><br>
+                            <span th:text="'Highlights: ' + ${requirement.highlights}"></span><br>
+                            <span th:text="'Exposure: ' + ${requirement.exposure}"></span><br>
+                            <span th:text="'Shadows: ' + ${requirement.shadows}"></span><br>
+                            <span th:text="'Whites: ' + ${requirement.whites}"></span><br>
+                            <span th:text="'Blacks: ' + ${requirement.blacks}"></span><br>
+                            <span th:text="'Luminance: ' + ${requirement.luminance}"></span><br>
+                            <span th:text="'Hue: ' + ${requirement.hue}"></span><br>
+                        </li>
+                    </ul>
                     <p>Funding: <span th:text="${plan.getFundingInUSD()}"></span></p>
-                    <!-- Add more details as needed -->
+
                 </td>
             </tr>
             </tbody>
