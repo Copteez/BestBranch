@@ -15,7 +15,7 @@
 <div class="container">
     <!-- Greeting message -->
     <div class="greeting-message">
-        <h1>Hello, <span th:text="${username}"></span>! 🌚🌝
+        <h1>Testing A Science Plan 🌚🌝
         </h1>
     </div>
     <!-- Menu -->
@@ -62,7 +62,7 @@
                 <th>End Date</th>
                 <th>Location</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th>Test Button</th>
             </tr>
             </thead>
             <tbody>
@@ -79,7 +79,7 @@
                 <td th:text="${plan.status}"></td>
                 <td class="submit-cell">
                     <form th:action="@{/testing}" method="post">
-                        <button type="submit" th:value="${plan.planNo}" th:text="${plan.planNo}" id="planId" name="planId" class="submit-btn">Test</button>
+                        <button type="submit" th:value="${plan.planNo}" th:text="${plan.planNo}"  id="planId" name="planId" class="submit-btn">Test</button>
                     </form>
                 </td>
             </tr>
