@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submission Gemini</title>
     <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">
-    <link rel="stylesheet" th:href="@{assets/css/submit.css}">
+    <link rel="stylesheet" th:href="@{assets/css/testing.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 </head>
@@ -49,7 +49,6 @@
                 <h2>Plan Waiting for Testing</h2>
                 <span>List of Plan</span>
             </div>
-            <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
         </div>
         <table>
             <thead>
@@ -72,8 +71,8 @@
             <tr th:each="plan : ${plans}">
                 <td th:text="${plan.planNo}"></td>
                 <td th:text="${plan.starSystem}"></td>
-                <td th:text="${plan.creator}"></td>
-                <td th:text="${plan.submitter}"></td>
+                <td th:text="${plan.creator.getName()}"></td>
+                <td th:text="${plan.submitter.getName()}"></td>
                 <td th:text="${plan.objectives}"></td>
                 <td th:text="${plan.fundingInUSD}"></td>
                 <td th:text="${plan.startDate}"></td>
@@ -81,8 +80,8 @@
                 <td th:text="${plan.telescopeLocation}"></td>
                 <td th:text="${plan.status}"></td>
                 <td class="submit-cell"> <!-- Added a class for styling -->
-                    <form th:action="@{/submission}" method="post">
-                        <a th:href="@{/dashboard}"> <button type="submit" class="submit-btn">Test </button></a>
+                    <form th:action="@{/testing}" method="post">
+                        <button type="submit" th:value="${plan.planNo}" th:text="${plan.planNo}" id="planId" name="planId" class="submit-btn">Test </button>
                     </form>
                 </td>
             </tr>
