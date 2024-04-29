@@ -95,7 +95,7 @@
             </tr>
             </thead>
             <tbody>
-            <tbody>
+            <tbody >
                     <tr th:each="plan : ${plans}">
 <!--                        <td th:text="${plan.planNo}"></td>-->
                         <td><form th:action="@{/sciPlan/{id}(id=${plan.planNo})}" method="get"><button type="submit" th:text="${plan.planNo}">Plan Details</button></form></td>

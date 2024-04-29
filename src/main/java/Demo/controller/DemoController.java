@@ -72,13 +72,34 @@ public class DemoController {
             return "redirect:/login";
         }
 
-        Optional<OurSciencePlan> oursciplan = sciplanRepository.findById(Integer.parseInt(id));
+        Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
+        OurSciencePlan oursciplan = null;
+        String result = "";
 
-        if (oursciplan.isPresent()) {
+        for (OurSciencePlan plan : ourplans) {
+            if (plan.getPlanNo() == Integer.parseInt(id)) {
+                oursciplan = plan;
+            }
+        }
+
+        System.out.println("\n oursciplan : \n" +
+                "\nID : "  + oursciplan.getPlanNo()+
+                "\nstatus : " + oursciplan.getStatus()+
+                "\nstartDate : " + oursciplan.getStartDate()+
+                "\nendDate : " + oursciplan.getEndDate()+
+                "\ngetObjectives ; " + oursciplan.getObjectives()+
+                "\ngetStarSystem : "+ oursciplan.getStarSystem()+
+                "\ngetfunding : " + oursciplan.getFundingInUSD()+
+                "\ncreater : " + oursciplan.getCreator().getName()+
+                "\nsubmitter : " + oursciplan.getSubmitter().getName()+
+                "\narray : " + oursciplan.getDataProcRequirements()
+        );
+
+        if (oursciplan != null) {
             model.addAttribute("plans", (oursciplan));
             return "SciplanDetail";
         }
-        return "SciplanDetail";
+        return "redirect:/dashboard";
     }
 
 

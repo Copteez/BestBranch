@@ -82,8 +82,7 @@
                 <td th:text="${plan.status}"></td>
                 <td class="submit-cell"> <!-- Added a class for styling -->
                     <form th:action="@{/submission}" method="post">
-                        <a th:href="@{/dashboard}"  button type="cancel" class="cancel-btn">Cancel</button></a></button>
-                        <a th:href="@{/dashboard}" button type="submit" class="submit-btn">Test</a></button>
+                        <a th:href="@{/dashboard}"> <button type="submit" class="submit-btn">Test </button></a>
                     </form>
                 </td>
             </tr>
