@@ -29,12 +29,15 @@ public class DemoController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, HttpSession session) throws ParseException {
+
         User user = (User) session.getAttribute("loggininUser");
         if (user != null) {
             model.addAttribute("username", user.getName());
         } else {
             return "redirect:/login";
         }
+
+        o.deleteAllSciencePlans();
 
         Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
         ArrayList<OurSciencePlan> oursciplans = new ArrayList<>();
@@ -58,6 +61,8 @@ public class DemoController {
         model.addAttribute("submittedPlan", submittedPlan);
         model.addAttribute("plans", oursciplans);
         model.addAttribute("totalPlans", oursciplans.size());
+
+
         return "Dashboard";
     }
 
@@ -220,11 +225,15 @@ public class DemoController {
         }
 
         if (oursciplan != null){
-            result = o.testSciencePlan(o.getSciencePlanByNo(Integer.parseInt(planId)));}
+            result = o.testSciencePlan(o.getSciencePlanByNo(Integer.parseInt(planId)));
+        }
+
         if (o.getSciencePlanByNo(Integer.parseInt(planId)).getStatus().equals(SciencePlan.STATUS.TESTED)){
             oursciplan.setStatus(SciencePlan.STATUS.TESTED);
             sciplanRepository.save(oursciplan);
         }
+
+        System.out.println(result);
         return "redirect:/dashboard";
     }
 
