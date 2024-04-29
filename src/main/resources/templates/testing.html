@@ -12,21 +12,17 @@
     function updateSciPlanDetails() {
         var planId = document.getElementById("planId").value;
         var detailsContainer = document.getElementById("sciPlanDetails");
-        if (planId) {
-            // Fetch plan details from a server endpoint
+            if (planId) {
             fetch(`/api/plan-details/${planId}`)
                 .then(response => response.json())
                 .then(plan => {
-                    detailsContainer.innerHTML = `
-                        <strong>Plan ID:</strong> ${planId}<br>
-                        <strong>Plan Name:</strong> ${plan.name}<br>
-                        <strong>Start Date:</strong> ${plan.startDate}<br>
-                        <strong>End Date:</strong> ${plan.endDate}<br>
-                        <strong>Funding:</strong> ${plan.fundingInUSD}<br>
-                        <strong>Star System:</strong> ${plan.starSystem}<br>
-                        <strong>Objective:</strong> ${plan.objectives}<br>
-                        <strong>Location:</strong> ${plan.telescopeLocation}
-                    `;
+                    document.getElementById("planIdCell").innerText = plan.planId;
+                    document.getElementById("startDateCell").innerText = plan.startDate;
+                    document.getElementById("endDateCell").innerText = plan.endDate;
+                    document.getElementById("fundingCell").innerText = plan.funding;
+                    document.getElementById("starSystemCell").innerText = plan.starSystem;
+                    document.getElementById("objectiveCell").innerText = plan.objective;
+                    document.getElementById("locationCell").innerText = plan.location;
                     detailsContainer.style.display = 'block';
                 });
         } else {
@@ -77,11 +73,42 @@
                     </select>
                 </div>
                 <div id="sciPlanDetails" class="sci-plan-details" style="display:none;">
-                    <!-- Dynamically filled details will appear here -->
+                    <table class="plan-details-table">
+                        <tr>
+                            <th>Plan ID</th>
+                            <td id="planIdCell"></td>
+                        </tr>
+                        <tr>
+                            <th>Start Date</th>
+                            <td id="startDateCell"></td>
+                        </tr>
+                        <tr>
+                            <th>End Date</th>
+                            <td id="endDateCell"></td>
+                        </tr>
+                        <tr>
+                            <th>Funding</th>
+                            <td id="fundingCell"></td>
+                        </tr>
+                        <tr>
+                            <th>Star System</th>
+                            <td id="starSystemCell"></td>
+                        </tr>
+                        <tr>
+                            <th>Objective</th>
+                            <td id="objectiveCell"></td>
+                        </tr>
+                        <tr>
+                            <th>Location</th>
+                            <td id="locationCell"></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="form-actions">
-                    <a th:href="@{/dashboard}"  button type="button" class="cancel-btn">Cancel</button></a>
-                    <button type="submit" class="submit-btn" th:href="@{templates/testingResult.html}">Submission</a></button>
+                    <div class="form-actions">
+                        <a th:href="@{/dashboard}" button type="cancel" class="cancel-btn">Cancel</button></a></button>
+                        <a th:href="@{/dashboard}" button type="submit" class="submit-btn">Test</a></button>
+                    </div>
                 </div>
             </form>
         </div>

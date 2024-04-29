@@ -122,7 +122,7 @@
         var planId = document.getElementById("planId").value;
         var detailsContainer = document.getElementById("sciPlanDetails");
             if (planId) {
-            fetch('/api/plan-details/${planId}')
+            fetch(`/api/plan-details/${planId}`)
                 .then(response => response.json())
                 .then(plan => {
                     document.getElementById("planIdCell").innerText = plan.planId;
