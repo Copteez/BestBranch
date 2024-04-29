@@ -15,7 +15,7 @@
 <div class="container">
     <!-- Greeting message -->
     <div class="greeting-message">
-        <h1>Hello, <span th:text="${username}"></span>! 🌚🌝
+        <h1>Testing A Science Plan</h1>
         </h1>
     </div>
     <!-- Menu -->
@@ -47,7 +47,6 @@
         <div class="plan-list-header">
             <div class="description-plan">
                 <h2>Plan Waiting for Testing</h2>
-                <span>List of Plan</span>
             </div>
         </div>
         <table>
@@ -67,8 +66,7 @@
             </tr>
             </thead>
             <tbody>
-            <tbody>
-            <tr th:each="plan : ${plans}">
+            <tr th:each="plan : ${plans}" th:if="${hasPlans}">
                 <td th:text="${plan.planNo}"></td>
                 <td th:text="${plan.starSystem}"></td>
                 <td th:text="${plan.creator.getName()}"></td>
@@ -79,14 +77,16 @@
                 <td th:text="${plan.endDate}"></td>
                 <td th:text="${plan.telescopeLocation}"></td>
                 <td th:text="${plan.status}"></td>
-                <td class="submit-cell"> <!-- Added a class for styling -->
+                <td class="submit-cell">
                     <form th:action="@{/testing}" method="post">
-                        <button type="submit" th:value="${plan.planNo}" th:text="${plan.planNo}" id="planId" name="planId" class="submit-btn">Test </button>
+                        <button type="submit" th:value="${plan.planNo}" th:text="${plan.planNo}" id="planId" name="planId" class="submit-btn">Test</button>
                     </form>
                 </td>
             </tr>
             </tbody>
         </table>
+        <tr th:if="${!hasPlans}" th:text="${plans}">
+        </tr>
     </div>
 </div>
 
