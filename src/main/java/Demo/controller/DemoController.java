@@ -35,6 +35,7 @@ public class DemoController {
         } else {
             return "redirect:/login";
         }
+        o.deleteAllSciencePlans();
 
         Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
         ArrayList<OurSciencePlan> oursciplans = new ArrayList<>();
@@ -198,9 +199,13 @@ public class DemoController {
             }
         }
 
-
-        model.addAttribute("plans", oursavedsciplans);
-
+        if (oursavedsciplans.isEmpty()) {
+            model.addAttribute("plans", "No Science plan to test");
+            model.addAttribute("hasPlans", false);
+        } else {
+            model.addAttribute("plans", oursavedsciplans);
+            model.addAttribute("hasPlans", true);
+        }
         return "testing";
     }
 
@@ -225,6 +230,7 @@ public class DemoController {
             oursciplan.setStatus(SciencePlan.STATUS.TESTED);
             sciplanRepository.save(oursciplan);
         }
+        System.out.println(result);
         return "redirect:/dashboard";
     }
 
@@ -242,7 +248,13 @@ public class DemoController {
                 ourtestedsciplans.add(plan);
             }
         }
-        model.addAttribute("plans", ourtestedsciplans);
+        if (ourtestedsciplans.isEmpty()) {
+            model.addAttribute("plans", "No Science plan to submit");
+            model.addAttribute("hasPlans", false);
+        } else {
+            model.addAttribute("plans", ourtestedsciplans);
+            model.addAttribute("hasPlans", true);
+        }
         return "submit";
     }
 
