@@ -1,31 +1,36 @@
 package Demo.model;
 
+import Demo.model.OurSciencePlan;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-public class User {
+public class User implements Serializable {
     @Id
     private String email;
 
     private String password;
     private String name;
 
-    @ManyToMany
+    public List<OurSciencePlan> getSciencePlans() {
+        return sciencePlans;
+    }
+
+    public void setSciencePlans(List<OurSciencePlan> sciencePlans) {
+        this.sciencePlans = sciencePlans;
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_science_plans",
             joinColumns = @JoinColumn(name = "user_email", referencedColumnName = "email"),
-            inverseJoinColumns = @JoinColumn(name = "plan_no")
+            inverseJoinColumns = @JoinColumn(name = "plan_no", referencedColumnName = "planNo")
     )
-    private Set<OurSciencePlan> sciencePlans = new HashSet<>();
-
-    @OneToMany(mappedBy = "creatorUser")
-    private Set<OurSciencePlan> createdPlans = new HashSet<>();
-
-    @OneToMany(mappedBy = "submitterUser")
-    private Set<OurSciencePlan> submittedPlans = new HashSet<>();
+    private List<OurSciencePlan> sciencePlans;
 
     public User() {
         this.email = "";

@@ -1,3 +1,112 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Submission Gemini</title>-->
+<!--    <link rel="icon" type="image/x-icon" th:src="@{images/Logo.ico}">-->
+<!--    <link rel="stylesheet" th:href="@{assets/css/submit.css}">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">-->
+
+<!--</head>-->
+<!--<body>-->
+
+<!--</head>-->
+<!--<div class="container">-->
+<!--    &lt;!&ndash; Greeting message &ndash;&gt;-->
+<!--    <div class="greeting-message">-->
+<!--        <h1>Hello, <span th:text="${username}"></span>! 🌚🌝-->
+<!--        </h1>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; Menu &ndash;&gt;-->
+<!--    <div class="menu">-->
+<!--        <div class="logo-container">-->
+<!--            <img th:src="@{images/Logo_circle.png}" alt="Logo" class="logo">-->
+<!--            <span class="menu-text">Dashboard</span>-->
+<!--            <span class="menu-version">V0.1</span>-->
+<!--        </div>-->
+<!--        <ul>-->
+<!--            <li><a th:href="@{/dashboard}"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Dashboard</a></li>-->
+<!--            <li><a th:href="@{/CreateSciPlan}"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Create Plan</a></li>-->
+<!--            <li><a th:href="@{/submission}"><img th:src="@{images/user-square%201.png}" alt="Logo" class="logo-menu">Submission</a></li>-->
+<!--            <li><a th:href="@{/testing}"><img th:src="@{images/wallet-money%202.png}" alt="Logo" class="logo-menu">Testing</a></li>-->
+<!--        </ul>-->
+<!--        <div class="profile">-->
+<!--            <a th:href="@{/login}" class="logout-link">-->
+<!--                <img th:src="@{/images/user.png}" alt="Logo" class="logo-menu">-->
+<!--                <span>Log out</span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; submit &ndash;&gt;-->
+<!--<div class="container">-->
+<!--    &lt;!&ndash; Plan list &ndash;&gt;-->
+<!--    <div class="plan-list">-->
+<!--        <div class="plan-list-header">-->
+<!--            <div class="description-plan">-->
+<!--                <h2>Plan Waiting for Submission</h2>-->
+<!--                <span>List of Plan</span>-->
+<!--            </div>-->
+<!--            <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>-->
+<!--            <div class="search-and-sort">-->
+<!--                <label>-->
+<!--                    <input type="text" placeholder="Search...">-->
+<!--                </label>-->
+<!--                <div class="sort-options">-->
+<!--                    <label for="sort">Sort by:</label>-->
+<!--                    <select id="sort">-->
+<!--                        <option value="newest">Newest</option>-->
+<!--                        <option value="oldest">Oldest</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Plan ID</th>-->
+<!--                <th>Star System</th>-->
+<!--                <th>Creator</th>-->
+<!--                <th>Submitter</th>-->
+<!--                <th>Objectives</th>-->
+<!--                <th>Funding</th>-->
+<!--                <th>Start Date</th>-->
+<!--                <th>End Date</th>-->
+<!--                <th>Location</th>-->
+<!--                <th>Status</th>-->
+<!--                <th>Action</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tbody>-->
+<!--            <tr th:each="plan : ${plans}">-->
+<!--                <td th:text="${plan.planNo}"></td>-->
+<!--                <td th:text="${plan.starSystem}"></td>-->
+<!--                <td th:text="${plan.creator}"></td>-->
+<!--                <td th:text="${plan.submitter}"></td>-->
+<!--                <td th:text="${plan.objectives}"></td>-->
+<!--                <td th:text="${plan.fundingInUSD}"></td>-->
+<!--                <td th:text="${plan.startDate}"></td>-->
+<!--                <td th:text="${plan.endDate}"></td>-->
+<!--                <td th:text="${plan.telescopeLocation}"></td>-->
+<!--                <td th:text="${plan.status}"></td>-->
+<!--                <td class="submit-cell"> &lt;!&ndash; Added a class for styling &ndash;&gt;-->
+<!--                    <form th:action="@{/submission}" method="put">-->
+<!--                        <input type="hidden" name="planId" th:value="${plan.planNo}" />-->
+<!--                        <button type="submit" class="submit-btn" th:href="@{templates/submitResult.html}">Submission</a></button>-->
+<!--                    </form>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -38,28 +147,28 @@
 <body>
 
 </head>
-    <aside class="sidebar">
-        <!-- Sidebar content here -->
-        <div class="menu">
-            <div class="logo-container">
-                <img th:src="@{images/Logo_circle.png}" alt="Logo" class="logo">
-                <span class="menu-text">Submission</span>
-                <span class="menu-version">V0.1</span>
-            </div>
-            <ul>
-                <li><a th:href="@{/dashboard}"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Dashboard</a></li>
-                <li><a th:href="@{/CreateSciPlan}"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Create Plan</a></li>
-                <li><a th:href="@{/submission}"><img th:src="@{images/user-square%201.png}" alt="Logo" class="logo-menu">Submission</a></li>
-                <li><a th:href="@{/testing}"><img th:src="@{images/wallet-money%202.png}" alt="Logo" class="logo-menu">Testing</a></li>
-            </ul>
-            <div class="profile">
-                <a href="/login" class="logout-link">
-                    <img th:src="@{images/user.png}" alt="Logo" class="logo-menu">
-                    <span>Log out</span>
-                </a>
-            </div>
+<aside class="sidebar">
+    <!-- Sidebar content here -->
+    <div class="menu">
+        <div class="logo-container">
+            <img th:src="@{images/Logo_circle.png}" alt="Logo" class="logo">
+            <span class="menu-text">Submission</span>
+            <span class="menu-version">V0.1</span>
         </div>
-    </aside>
+        <ul>
+            <li><a th:href="@{/dashboard}"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Dashboard</a></li>
+            <li><a th:href="@{/CreateSciPlan}"><img th:src="@{images/3d-square%201.png}" alt="Logo" class="logo-menu">Create Plan</a></li>
+            <li><a th:href="@{/submission}"><img th:src="@{images/user-square%201.png}" alt="Logo" class="logo-menu">Submission</a></li>
+            <li><a th:href="@{/testing}"><img th:src="@{images/wallet-money%202.png}" alt="Logo" class="logo-menu">Testing</a></li>
+        </ul>
+        <div class="profile">
+            <a href="/login" class="logout-link">
+                <img th:src="@{images/user.png}" alt="Logo" class="logo-menu">
+                <span>Log out</span>
+            </a>
+        </div>
+    </div>
+</aside>
 <!-- submit -->
 <div class="submit-container">
     <div class="greeting-message">

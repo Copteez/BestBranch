@@ -3,8 +3,7 @@ package Demo.model;
 import edu.gemini.app.ocs.model.DataProcRequirement;
 import edu.gemini.app.ocs.model.SciencePlan;
 import edu.gemini.app.ocs.model.StarSystem;
-import edu.gemini.app.ocs.model.SciencePlan.TELESCOPELOC;
-import edu.gemini.app.ocs.model.SciencePlan.STATUS;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,16 +16,12 @@ public class SciencePlanAdapter extends SciencePlan {
         super();
         if (plan != null) {
             this.ourPlan = plan;
-            setCreator(ourPlan.getCreatorUser().getName());
-            if (plan.getSubmitter().equals(null)){
-                setSubmitter("");
-            }else{
-                setSubmitter(ourPlan.getSubmitterUser().getName());
-            }
+            setCreator(ourPlan.getCreator().getName());
+            setSubmitter(ourPlan.getSubmitter().getName());
             setFundingInUSD(ourPlan.getFundingInUSD());
             setObjectives(ourPlan.getObjectives());
             setStarSystem(StarSystem.CONSTELLATIONS.valueOf(ourPlan.getStarSystem().name()));
-
+            setStatus(ourPlan.getStatus());
             Date startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(ourPlan.getStartDate());
             setStartDate(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(startDate));
 

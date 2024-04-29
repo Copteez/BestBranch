@@ -68,10 +68,10 @@
             <form id="testingForm" th:action="@{/testing}" method="post">
                 <div class="form-group">
                     <label for="planId">Choose Plan ID</label>
-                    <select id="planId" name="planId" >
+                    <select id="planId" name="planId" onchange="updateSciPlanDetails()">
                         <option value="">Select...</option>
                         <th:block th:each="plan : ${plans}">
-                            <option th:value="${plan.getPlanNo()}" th:text="${plan.planNo}"></option>
+                            <option th:value="${plan.getPlanNo()}" th:text="${plan.planNo}" ></option>
                         </th:block>
                         <!-- Option values go here -->
                     </select>
