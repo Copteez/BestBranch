@@ -1,218 +1,218 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
 }
 
 /* Existing styles remain unchanged */
 .container {
-    display: flex;
+  display: flex;
 }
 
 .menu {
-    height: 100vh; /* Set height to 100% of viewport height */
-    width: 250px;
-    background-color: white;
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 10px 50px rgba(0, 0, 150, 0.1); /* Adding drop shadow */
-    position: fixed; /* Change to fixed positioning */
-    top: 0; /* Align with the top of the viewport */
-    left: 0; /* Align with the left of the viewport */
-    z-index: 1000; /* Ensure it's on top of other content */
-    overflow-y: auto; /* Add scrollbar if content exceeds viewport height */
+  height: 100vh; /* Set height to 100% of viewport height */
+  width: 250px;
+  background-color: white;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 50px rgba(0, 0, 150, 0.1); /* Adding drop shadow */
+  position: fixed; /* Change to fixed positioning */
+  top: 0; /* Align with the top of the viewport */
+  left: 0; /* Align with the left of the viewport */
+  z-index: 1000; /* Ensure it's on top of other content */
+  overflow-y: auto; /* Add scrollbar if content exceeds viewport height */
 }
 
 .menu-text {
-    color: #000; /* Text color */
-    margin-left: 10px;
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: 0.26px;
-    word-wrap: break-word
+  color: #000; /* Text color */
+  margin-left: 10px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.26px;
+  word-wrap: break-word;
 }
 
-.menu-version{
-    color: #838383;
-    font-size: 10px;
-    font-weight: 500;
-    word-wrap: break-word;
-    margin-top: 10px;
+.menu-version {
+  color: #838383;
+  font-size: 10px;
+  font-weight: 500;
+  word-wrap: break-word;
+  margin-top: 10px;
 }
-
 
 .menu ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .menu ul li {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .menu ul li a {
-    color: #9197B3;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    word-wrap: break-word;
-    display: block;
-    padding: 15px;
-    border-radius: 5px;
+  color: #9197b3;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  word-wrap: break-word;
+  display: block;
+  padding: 15px;
+  border-radius: 5px;
 }
 
 .menu ul li a img {
-    vertical-align: middle; /* Align the logo vertically */
-    margin-right: 15px; /* Add some space between the logo and text */
-    width: 24px; /* Set the width of the image */
-    height: 24px; /* Set the height of the image */
+  vertical-align: middle; /* Align the logo vertically */
+  margin-right: 15px; /* Add some space between the logo and text */
+  width: 24px; /* Set the width of the image */
+  height: 24px; /* Set the height of the image */
 }
 
 .menu ul li a:hover img {
-    filter: brightness(0) invert(1); /* Invert the colors and set brightness to 0 */
+  filter: brightness(0) invert(1); /* Invert the colors and set brightness to 0 */
 }
 
 .menu ul li a:hover {
-    background-color: #5932EA;
-    color: white;
+  background-color: #5932ea;
+  color: white;
 }
 
 .profile {
-    width: 250px;
-    position: absolute; /* Position the profile section absolutely */
-    bottom: 50px; /* Align the profile section to the bottom */
-    left: 10px; /* Adjust as needed */
-    display: block;
-    align-items: center; /* Center items vertically */
-    border-radius: 5px;
+  width: 250px;
+  position: absolute; /* Position the profile section absolutely */
+  bottom: 50px; /* Align the profile section to the bottom */
+  left: 10px; /* Adjust as needed */
+  display: block;
+  align-items: center; /* Center items vertically */
+  border-radius: 5px;
 }
 
 .profile a {
-    text-decoration: none;
-    color: #9197B3;
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-radius: 5px;
+  text-decoration: none;
+  color: #9197b3;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 5px;
 }
 
 .profile a:hover {
-    background-color: #5932EA;
-    color: white;
+  background-color: #5932ea;
+  color: white;
 }
 
 .profile a:hover img {
-    filter: brightness(0) invert(1); /* Invert the colors and set brightness to 0 */
+  filter: brightness(0) invert(1); /* Invert the colors and set brightness to 0 */
 }
 
 .profile img {
-    vertical-align: middle; /* Align the logo vertically */
-    margin-right: 15px; /* Add some space between the logo and text */
-    width: 24px; /* Set the width of the image */
-    height: 24px; /* Set the height of the image */
+  vertical-align: middle; /* Align the logo vertically */
+  margin-right: 15px; /* Add some space between the logo and text */
+  width: 24px; /* Set the width of the image */
+  height: 24px; /* Set the height of the image */
 }
 
 .logo-container {
-    top: 10px; /* Adjust as needed */
-    left: 10px; /* Adjust as needed */
-    z-index: 10; /* Ensure the logo stays on top of other elements */
-    display: flex;
-    align-items: center; /* Center items vertically */
-    margin-bottom: 20px; /* Add some space between logo/text and menu items */
+  top: 10px; /* Adjust as needed */
+  left: 10px; /* Adjust as needed */
+  z-index: 10; /* Ensure the logo stays on top of other elements */
+  display: flex;
+  align-items: center; /* Center items vertically */
+  margin-bottom: 20px; /* Add some space between logo/text and menu items */
 }
 
 .logo {
-    width: 70px; /* Adjust as needed */
-    height: auto; /* Keep the aspect ratio */
+  width: 70px; /* Adjust as needed */
+  height: auto; /* Keep the aspect ratio */
 }
 
 .submit-content {
-    flex-grow: 1;
-    display: flex;
-    align-items: center; /* Center .submission-form vertically */
-    justify-content: center; /* Center .submission-form horizontally */
-    padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center; /* Center .submission-form vertically */
+  justify-content: center; /* Center .submission-form horizontally */
+  padding: 20px;
 }
 
 .svg-container {
-    height: 40px;
-    width: 40px;
-    position: relative;
-    margin-right: 20px; /* Add some space between the svg-container and Total-Plan-Content */
+  height: 40px;
+  width: 40px;
+  position: relative;
+  margin-right: 20px; /* Add some space between the svg-container and Total-Plan-Content */
 }
 
- .submission-form {
-       /* ... other styles ... */
-       box-shadow: none;  /* Remove the shadow */
-   }
+.submission-form {
+  /* ... other styles ... */
+  box-shadow: none; /* Remove the shadow */
+}
 
 .greeting-message {
-    top: 3%;
-    margin-left: 25%;
-    color: black;
-    font-size: 24px;
-    font-weight: 500;
-    word-wrap: break-word
+  top: 3%;
+  margin-left: 25%;
+  color: black;
+  font-size: 24px;
+  font-weight: 500;
+  word-wrap: break-word;
 }
 
 /* Form Group Styles */
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 /* Label Styles */
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 16px;
-    color: #333;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
 }
 
 /* Input Field Styles */
 .form-group input[type="text"],
 .form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box; /* So padding doesn't affect the width */
-    font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; /* So padding doesn't affect the width */
+  font-size: 16px;
 }
 
 .form-group input[type="text"]:focus,
 .form-group select:focus {
-    border-color: #aaa;
-    outline: none; /* Removes the default focus outline */
+  border-color: #aaa;
+  outline: none; /* Removes the default focus outline */
 }
 
 /* Select Dropdown Styles */
 .form-group select {
-    -webkit-appearance: none; /* Removes default chrome and safari style */
-    -moz-appearance: none;    /* Removes default style Firefox */
-    appearance: none;         /* Removes default style for IE */
-    background-image: url('path-to-your-dropdown-icon.png'); /* Add your own icon */
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    padding-right: 30px; /* Make space for the icon */
+  -webkit-appearance: none; /* Removes default chrome and safari style */
+  -moz-appearance: none; /* Removes default style Firefox */
+  appearance: none; /* Removes default style for IE */
+  background-image: url("path-to-your-dropdown-icon.png"); /* Add your own icon */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px; /* Make space for the icon */
 }
 
 /* Submit Button Styles */
 .cancel-btn {
-      font-size: 18px;
-      color: white;
-      padding: 15px 25px;
-      text-align: center;
-        border-radius: 10px;
-        box-shadow: none;
-         height: 50px;
-            margin-top: 100px;
-            margin-right: 100px;
-            margin-left: 100px;
-            background-color: #cc2c18;
+  font-size: 18px;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: none;
+  height: 50px;
+  margin-top: 100px;
+  margin-right: 100px;
+  margin-left: 100px;
+  background-color: #cc2c18;
 }
 
 .cancel-btn:hover {
@@ -226,23 +226,39 @@ body, html {
   text-align: center;
   border-radius: 10px;
   box-shadow: none;
-   height: 50px;
-   margin-top: 100px;
-    margin-right: 100px;
-    margin-left: 100px;
-    background-color: orange;
+  height: 50px;
+  margin-top: 100px;
+  margin-right: 100px;
+  margin-left: 100px;
+  background-color: orange;
 }
 
 .submit-btn:hover {
   background-color: #eb9900;
 }
 .sci-plan-details {
-        margin-top: 20px;
-        padding: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        color: #333;
-        font-size: 14px;
-        display: none; /* Initially hidden */
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 14px;
+  display: none; /* Initially hidden */
+}
+.plan-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.plan-details-table th,
+.plan-details-table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.plan-details-table th {
+  background-color: #f2f2f2;
 }
