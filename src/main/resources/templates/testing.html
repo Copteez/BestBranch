@@ -41,7 +41,7 @@
     <div class="menu">
         <div class="logo-container">
             <img th:src="@{images/Logo_circle.png}" alt="Logo" class="logo">
-            <span class="menu-text">Testing</span>
+            <span class="menu-text">Gemini</span>
             <span class="menu-version">V0.1</span>
         </div>
         <ul>
@@ -80,7 +80,7 @@
                     <!-- Dynamically filled details will appear here -->
                 </div>
                 <div class="form-actions">
-                    <a href="/dashboard"  button type="button" class="cancel-btn">Cancel</button></a>
+                    <a th:href="@{/dashboard}"  button type="button" class="cancel-btn">Cancel</button></a>
                     <button type="submit" class="submit-btn" th:href="@{templates/testingResult.html}">Submission</a></button>
                 </div>
             </form>

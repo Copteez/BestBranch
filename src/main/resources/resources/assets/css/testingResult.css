@@ -157,3 +157,7 @@ body, html {
     margin-top: 10%;
     justify-content: center;
 }
+
+.result-container a:hover{
+    color: white;
+}
