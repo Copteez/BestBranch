@@ -36,6 +36,8 @@ public class DemoController {
             return "redirect:/login";
         }
 
+        o.deleteAllSciencePlans();
+
         Iterable<OurSciencePlan> ourplans = sciplanRepository.findAll();
         ArrayList<OurSciencePlan> oursciplans = new ArrayList<>();
 
